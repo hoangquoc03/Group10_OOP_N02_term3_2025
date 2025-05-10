@@ -22,3 +22,8 @@ CCCD;
 SDT;
 phongthue;
 }
+class Landlord {
+LanlordID;
+Name;
+SDT;
+}
