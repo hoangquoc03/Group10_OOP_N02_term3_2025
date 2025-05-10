@@ -25,4 +25,4 @@ class Landlord {
 LanlordID;
 Name;
 SDT;
-}
+}.
