@@ -1,7 +1,7 @@
 
 
 
-import models.room;
+import models.Room;
 
 
 
@@ -13,7 +13,7 @@ public class testRoom{
 
     public static void hienthiphong(){
 
-     room r = new room("r12345", 2300);
+     Room r = new Room("r12345", 2300);
 
      String id = r.getRoomID();
      double price= r.getPrice();

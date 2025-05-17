@@ -1,14 +1,14 @@
 
 package models;
 
-public class room {
+public class Room {
 
     private String RoomID;
     private double price;
 
     // constructor
 
-    public room(String RoomID, double price) {
+    public Room(String RoomID, double price) {
         this.RoomID = RoomID;
         this.price = price;
     }
@@ -31,15 +31,12 @@ public class room {
 
     public static void hienthiphong() {
 
-        room r = new room("r12345", 2300);
+        Room r = new Room("r12345", 2300);
 
         String id = r.getRoomID();
         double price = r.getPrice();
 
         System.out.println("Hien thi thong tin phong:" + id + " sotien: " + price);
-
-        System.out.println("test:");
-
     }
 
 }
