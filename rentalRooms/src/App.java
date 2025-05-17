@@ -2,17 +2,14 @@
 
 
 import test.testrentalroom;
+import models.Landlord;
 //import test.testRoom;
-import models.room;
-
+import models.Room;
+import models.Tenant;
 
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
-        testrentalroom.rentalroom();
-       
-        room.hienthiphong();
-
+        Room.hienthiphong();
     }
 }
