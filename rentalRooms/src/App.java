@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 import models.Landlord;
 import models.Room;
