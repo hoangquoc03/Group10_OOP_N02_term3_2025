@@ -34,4 +34,12 @@ public class Landlord {
     public void setSdt(String sdt) {
         this.sdt = sdt;
     }
+    public static void printinfo() {
+
+        Landlord l = new Landlord("L1234","ABC","0912345678");
+        String lid = l.getLandlordID();
+        String name = l.getName();
+        String sdt = l.getSdt();
+        System.out.println("LandLord:" + lid + " Name :" + name + " So dien thoai:" + sdt);
+    }
 }
