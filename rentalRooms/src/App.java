@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 import models.Landlord;
 import models.Room;
 import models.Tenant;
@@ -38,5 +39,6 @@ public class App {
         System.out.println("Hello, World!");
         testrentalroom.rentalroom();
         room.hienthiphong();
+        Landlord.printinfo(); // giữ thêm dòng từ nhánh Test
     }
 }
