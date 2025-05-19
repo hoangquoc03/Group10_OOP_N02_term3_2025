@@ -39,6 +39,10 @@ public class App {
         System.out.println("Hello, World!");
         testrentalroom.rentalroom();
         room.hienthiphong();
-        Landlord.printinfo(); // giữ thêm dòng từ nhánh Test
+        Landlord.printinfo();
+
+        // Dòng bổ sung từ Tenant.java
+        Tenant tenant1 = new Tenant("T001", "Nguyen Van A", "0987654321");
+        tenant1.displayInfo();
     }
 }
