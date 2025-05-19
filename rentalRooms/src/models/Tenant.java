@@ -36,19 +36,13 @@ public class Tenant {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-    // Method instance in thông tin tenant
     public void displayInfo() {
         System.out.println("Tenant ID: " + tenantID + ", Name: " + name + ", Phone: " + phone);
     }
-
-    // Override toString để in đối tượng dễ dàng hơn
     @Override
     public String toString() {
         return "Tenant ID: " + tenantID + ", Name: " + name + ", Phone: " + phone;
     }
-
-    // Method static in thông tin tenant mẫu
     public static void printSampleTenant() {
         Tenant t = new Tenant("T001", "Nguyen Van A", "0987654321");
         t.displayInfo();
