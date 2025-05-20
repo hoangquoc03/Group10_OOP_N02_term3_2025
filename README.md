@@ -54,5 +54,5 @@ Yêu cầu:
   ## Nội dung 2:
   
  Sequence Diagram
- <img src =Downloads/group10noidung3.png"
+ <img src ="img/group10noidung3.png">
  
