@@ -52,7 +52,7 @@ Yêu cầu:
 - Arrayist<Room>,LinkedList<Tenant>.
 - Sinh viên có thể thêm các chức năng vào chương trình để ứng dụng phong phú hơn bằng cách thêm các nghiệp vụ cho bài toán (tùy chọn)
   ## Nội dung 2:
-  
+  <img src ="img/group10noidung2.png">
  Sequence Diagram
  <img src ="img/group10noidung3.png">
  
