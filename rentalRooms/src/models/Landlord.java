@@ -19,10 +19,7 @@ public class Landlord implements Identifiable {
 
     // Constructor không có địa chỉ
     public Landlord(String id, String name, String sdt) {
-        this.id = id;
-        this.name = name;
-        this.sdt = sdt;
-        this.diaChi = "";
+        this(id, name, sdt, "");
     }
 
     // Getter
@@ -46,7 +43,7 @@ public class Landlord implements Identifiable {
         return diaChi;
     }
 
-    // Setter (nếu cần)
+    // Setter
     public void setName(String name) {
         this.name = name;
     }
@@ -101,7 +98,13 @@ public class Landlord implements Identifiable {
         System.out.println("Không tìm thấy Landlord với ID: " + landlordID);
     }
 
-    // Phương thức kiểm tra nhanh
+    // printinfo đơn giản
+    public static void printinfo() {
+        Landlord l = new Landlord("L1234", "ABC", "0912345678");
+        System.out.println("LandLord: " + l.getLandlordID() + " Name: " + l.getName() + " So dien thoai: " + l.getSdt());
+    }
+
+    // Kiểm tra nhanh
     public static void main(String[] args) {
         createLandlord("L1234", "ABC", "0912345678");
         createLandlord("L5678", "XYZ", "0987654321");
@@ -111,19 +114,11 @@ public class Landlord implements Identifiable {
         readAllLandlords();
 
         updateLandlord("L5678", "XYZ Updated", "0911111111");
-
         System.out.println("\nDanh sách sau khi cập nhật:");
         readAllLandlords();
 
         deleteLandlord("L1234");
-
         System.out.println("\nDanh sách sau khi xóa:");
         readAllLandlords();
-    }
-
-    // printinfo đơn giản
-    public static void printinfo() {
-        Landlord l = new Landlord("L1234", "ABC", "0912345678");
-        System.out.println("LandLord: " + l.getLandlordID() + " Name: " + l.getName() + " So dien thoai: " + l.getSdt());
     }
 }
