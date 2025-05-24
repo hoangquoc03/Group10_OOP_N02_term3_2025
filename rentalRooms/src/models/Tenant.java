@@ -1,14 +1,18 @@
 package models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Tenant implements Identifiable {
-    private String id;
+    private String id; // dùng chung cho mọi constructor
     private String name;
     private String phone;
-    private LocalDate ngayThue; // ✅ Thêm thuộc tính ngày thuê
+    private LocalDate ngayThue; // ngày thuê
 
-    // Constructor có ngày thuê
+    // Danh sách tenant
+    private static ArrayList<Tenant> tenantList = new ArrayList<>();
+
+    // Constructor đầy đủ
     public Tenant(String id, String name, String phone, LocalDate ngayThue) {
         this.id = id;
         this.name = name;
@@ -16,7 +20,7 @@ public class Tenant implements Identifiable {
         this.ngayThue = ngayThue;
     }
 
-    // Constructor không có ngày thuê (dùng cho test/sample)
+    // Constructor không có ngày thuê (test/sample)
     public Tenant(String id, String name, String phone) {
         this.id = id;
         this.name = name;
@@ -24,31 +28,97 @@ public class Tenant implements Identifiable {
         this.ngayThue = null;
     }
 
-    // Getter
-    public String getID() { return id; }
-    public String getName() { return name; }
-    public String getPhone() { return phone; }
-    public LocalDate getNgayThue() { return ngayThue; }
-
-    // Setter
-    public void setName(String name) { this.name = name; }
-    public void setPhone(String phone) { this.phone = phone; }
-    public void setNgayThue(LocalDate ngayThue) { this.ngayThue = ngayThue; }
-
-    // In thông tin tenant
-    public void displayInfo() {
-        System.out.println("Tenant ID: " + id + ", Name: " + name + ", Phone: " + phone +
-            (ngayThue != null ? ", Ngày thuê: " + ngayThue.toString() : ""));
+    // Implement từ interface Identifiable
+    @Override
+    public String getID() {
+        return id;
     }
 
-    // Override toString để dễ in
+    // Getter
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public LocalDate getNgayThue() {
+        return ngayThue;
+    }
+
+    // Setter
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setNgayThue(LocalDate ngayThue) {
+        this.ngayThue = ngayThue;
+    }
+
+    // Hiển thị thông tin tenant
+    public void displayInfo() {
+        System.out.println("Tenant ID: " + id + ", Name: " + name + ", Phone: " + phone +
+            (ngayThue != null ? ", Ngày thuê: " + ngayThue : ""));
+    }
+
+    // Override toString
     @Override
     public String toString() {
         return "Tenant ID: " + id + ", Name: " + name + ", Phone: " + phone +
-            (ngayThue != null ? ", Ngày thuê: " + ngayThue.toString() : "");
+            (ngayThue != null ? ", Ngày thuê: " + ngayThue : "");
     }
 
-    // Tenant mẫu
+    // Thêm tenant vào danh sách
+    public static void addTenant(Tenant tenant) {
+        tenantList.add(tenant);
+        System.out.println("Đã thêm tenant: " + tenant.getID());
+    }
+
+    // Cập nhật tenant theo ID
+    public static boolean updateTenant(String tenantID, String newName, String newPhone) {
+        for (Tenant tenant : tenantList) {
+            if (tenant.getID().equals(tenantID)) {
+                tenant.setName(newName);
+                tenant.setPhone(newPhone);
+                System.out.println("Đã cập nhật tenant: " + tenantID);
+                return true;
+            }
+        }
+        System.out.println("Không tìm thấy tenant với ID: " + tenantID);
+        return false;
+    }
+
+    // Xóa tenant theo ID
+    public static boolean deleteTenant(String tenantID) {
+        for (Tenant tenant : tenantList) {
+            if (tenant.getID().equals(tenantID)) {
+                tenantList.remove(tenant);
+                System.out.println("Đã xóa tenant: " + tenantID);
+                return true;
+            }
+        }
+        System.out.println("Không tìm thấy tenant để xóa với ID: " + tenantID);
+        return false;
+    }
+
+    // Hiển thị tất cả tenants
+    public static void displayTenants() {
+        if (tenantList.isEmpty()) {
+            System.out.println("Danh sách tenant đang rỗng.");
+            return;
+        }
+        System.out.println("Danh sách tenant:");
+        for (Tenant tenant : tenantList) {
+            tenant.displayInfo();
+        }
+    }
+
+    // Tenant mẫu (test nhanh)
     public static void printSampleTenant() {
         Tenant t = new Tenant("T001", "Nguyen Van A", "0987654321");
         t.displayInfo();
