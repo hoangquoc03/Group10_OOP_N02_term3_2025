@@ -1,18 +1,18 @@
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import models.Landlord;
 import models.Room;
 import models.Tenant;
 import models.CrudManager;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+
 import CRUD.PrintList;
 import CRUD.Search;
 import CRUD.Output;
 
 import test.testrentalroom;
-// import test.testRoom;
-import models.room;
+import test.TestTenant;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -38,11 +38,10 @@ public class App {
         // Gọi các hàm từ nhánh khác
         System.out.println("Hello, World!");
         testrentalroom.rentalroom();
-        room.hienthiphong();
+        Room.hienthiphong();
         Landlord.printinfo();
 
-        // Dòng bổ sung từ Tenant.java
-        Tenant tenant1 = new Tenant("T001", "Nguyen Van A", "0987654321");
-        tenant1.displayInfo();
+        // Gọi phương thức test tenant
+        TestTenant.test();
     }
 }
