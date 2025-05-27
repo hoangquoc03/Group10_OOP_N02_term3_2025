@@ -3,7 +3,8 @@ package test;
 import models.Tenant;
 
 public class TestTenant {
-    public static void main(String[] args) {
+    //main chi co 01 trong Project
+    public static void test() {
         // Thêm tenant
         Tenant.addTenant(new Tenant("T001", "Nguyen Van A", "0123456789"));
         Tenant.addTenant(new Tenant("T002", "Tran Thi B", "0987654321"));
