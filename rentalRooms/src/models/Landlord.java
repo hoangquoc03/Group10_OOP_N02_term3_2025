@@ -11,11 +11,19 @@ public class Landlord implements Identifiable {
         this.sdt = sdt;
     }
 
+    public String toString() {
+        return "Landlord: " + landlordID + ", Name: " + name + ", SĐT: " + sdt;
+    }
     public String getID() {
         return landlordID;
     }
 
-    public String toString() {
-        return "Landlord: " + landlordID + ", Name: " + name + ", SĐT: " + sdt;
+    public String getName() {
+        return name;
     }
+
+    public String getSdt() {
+        return sdt;
+    }
+
 }

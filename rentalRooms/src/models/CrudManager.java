@@ -49,4 +49,8 @@ public class CrudManager<T extends Identifiable> {
         }
         System.out.println("Không tìm thấy ID: " + id);
     }
+    
+    public List<T> getItems() {
+        return items;
+    }
 } 
