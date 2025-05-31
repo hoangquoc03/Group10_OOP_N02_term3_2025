@@ -2,7 +2,7 @@ package models;
 
 import java.time.LocalDate;
 
-public class Tenant {
+public class Tenant implements Identifiable {
     private String id;
     private String name;
     private String phone;

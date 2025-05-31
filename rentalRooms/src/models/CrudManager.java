@@ -3,9 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Lớp tổng quát quản lý CRUD cho mọi đối tượng có ID (Identifiable)
- */
+
 public class CrudManager<T extends Identifiable> {
     private List<T> items = new ArrayList<>();
 
