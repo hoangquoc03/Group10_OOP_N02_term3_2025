@@ -165,4 +165,42 @@ public class App {
             );
         }
     }
+    public static void hienThiPhongDenNgayDongTien(CrudManager<Room> roomManager) {
+    LocalDate today = LocalDate.now();
+    boolean found = false;
+
+    System.out.println("\n--- PHÒNG ĐẾN HẠN ĐÓNG TIỀN TRỌ ---");
+    System.out.printf("%-10s %-10s %-20s %-15s %-25s %-20s %-15s %-12s\n",
+        "Room ID", "Price", "Landlord Name", "Phone", "Address", "Tenant Name", "Phone", "Ngày thuê");
+    System.out.println("----------------------------------------------------------------------------------------------------");
+
+    for (Room room : roomManager.getItems()) {
+        Tenant tenant = room.getTenant();
+        LocalDate rentDate = tenant.getNgayThue();
+
+        
+        long monthsBetween = java.time.temporal.ChronoUnit.MONTHS.between(rentDate.withDayOfMonth(1), today.withDayOfMonth(1));
+
+        // Kiểm tra nếu hôm nay là ngày đóng tiền tháng mới
+        LocalDate nextPaymentDate = rentDate.plusMonths(monthsBetween);
+        if (nextPaymentDate.equals(today)) {
+            System.out.printf("%-10s %-10.2f %-20s %-15s %-25s %-20s %-15s %-12s\n",
+                room.getID(),
+                room.getPrice(),
+                room.getLandlord().getName(),
+                room.getLandlord().getSdt(),
+                room.getLandlord().getDiaChi(),
+                tenant.getName(),
+                tenant.getPhone(),
+                tenant.getNgayThue().toString()
+            );
+            found = true;
+        }
+    }
+
+    if (!found) {
+        System.out.println("Không có phòng nào đến ngày đóng tiền hôm nay.");
+    }
+}
+
 }
