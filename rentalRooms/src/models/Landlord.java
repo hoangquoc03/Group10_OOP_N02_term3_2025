@@ -1,21 +1,20 @@
 package models;
 
 public class Landlord implements Identifiable {
-    private String landlordID;
+    private String id;
     private String name;
     private String sdt;
+    private String diaChi;
 
-    public Landlord(String landlordID, String name, String sdt) {
-        this.landlordID = landlordID;
+    public Landlord(String id, String name, String sdt, String diaChi) {
+        this.id = id;
         this.name = name;
         this.sdt = sdt;
+        this.diaChi = diaChi;
     }
 
-    public String toString() {
-        return "Landlord: " + landlordID + ", Name: " + name + ", SĐT: " + sdt;
-    }
     public String getID() {
-        return landlordID;
+        return id;
     }
 
     public String getName() {
@@ -26,4 +25,9 @@ public class Landlord implements Identifiable {
         return sdt;
     }
 
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    
 }

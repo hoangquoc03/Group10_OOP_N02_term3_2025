@@ -3,7 +3,8 @@ import models.Landlord;
 import models.Room;
 import models.Tenant;
 import models.CrudManager;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -56,7 +57,14 @@ public class App {
                 if (!landlordPhone.isEmpty()) break;
                 System.out.println("SĐT không được để trống.");
             }
-            Landlord landlord = new Landlord(landlordID, landlordName, landlordPhone);
+            String landlordDiaChi;
+            while (true) {
+                System.out.print("Địa chỉ chủ trọ: ");
+                landlordDiaChi = scanner.nextLine().trim();
+                if (!landlordDiaChi.isEmpty()) break;
+                System.out.println("Địa chỉ không được để trống.");
+            }
+            Landlord landlord = new Landlord(landlordID, landlordName, landlordPhone, landlordDiaChi);
             landlordManager.create(landlord);
 
             System.out.println("Nhập thông tin người thuê:");
@@ -79,7 +87,18 @@ public class App {
                 if (!tenantPhone.isEmpty()) break;
                 System.out.println("SĐT không được để trống.");
             }
-            Tenant tenant = new Tenant(tenantID, tenantName, tenantPhone);
+            LocalDate ngayThue;
+            while (true) {
+                System.out.print("Ngày thuê (định dạng yyyy-MM-dd): ");
+                String inputDate = scanner.nextLine().trim();
+                try {
+                    ngayThue = LocalDate.parse(inputDate); // định dạng yyyy-MM-dd
+                    break;
+                } catch (DateTimeParseException e) {
+                    System.out.println("Ngày không hợp lệ. Vui lòng nhập lại theo định dạng yyyy-MM-dd.");
+                }
+            }
+            Tenant tenant = new Tenant(tenantID, tenantName, tenantPhone, ngayThue);
 
             Room room = new Room(roomID, price, landlord, tenant);
             roomManager.create(room);
@@ -129,18 +148,20 @@ public class App {
 
     //  HÀM hiển thị bảng phòng
     public static void hienThiBangPhong(CrudManager<Room> roomManager) {
-        System.out.printf("%-10s %-10s %-20s %-15s %-20s %-15s\n",
-            "Room ID", "Price", "Landlord Name", "Phone", "Tenant Name", "Phone");
-        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.printf("%-10s %-10s %-20s %-15s %-25s %-20s %-15s %-12s\n",
+    "Room ID", "Price", "Landlord Name", "Phone", "Address", "Tenant Name", "Phone", "Ngày thuê");
+        System.out.println("----------------------------------------------------------------------------------------------------");
 
         for (Room room : roomManager.getItems()) {
-            System.out.printf("%-10s %-10.2f %-20s %-15s %-20s %-15s\n",
+            System.out.printf("%-10s %-10.2f %-20s %-15s %-25s %-20s %-15s %-12s\n",
                 room.getID(),
                 room.getPrice(),
                 room.getLandlord().getName(),
                 room.getLandlord().getSdt(),
+                room.getLandlord().getDiaChi(),
                 room.getTenant().getName(),
-                room.getTenant().getPhone()
+                room.getTenant().getPhone(),
+                room.getTenant().getNgayThue().toString()
             );
         }
     }

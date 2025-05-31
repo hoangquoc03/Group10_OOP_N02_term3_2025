@@ -1,27 +1,26 @@
 package models;
 
-public class Tenant implements Identifiable {
-    private String tenantID;
+import java.time.LocalDate;
+
+public class Tenant {
+    private String id;
     private String name;
     private String phone;
+    private LocalDate ngayThue; // ✅ Thêm thuộc tính này
 
-    public Tenant(String tenantID, String name, String phone) {
-        this.tenantID = tenantID;
+    public Tenant(String id, String name, String phone, LocalDate ngayThue) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
+        this.ngayThue = ngayThue;
     }
 
-    public String getID() {
-        return tenantID;
-    }
-    public String getName() {
-        return name;
-    }
+    // Getter
+    public String getID() { return id; }
+    public String getName() { return name; }
+    public String getPhone() { return phone; }
+    public LocalDate getNgayThue() { return ngayThue; }
 
-    public String getPhone() {
-        return phone;
-    }
-    public String toString() {
-        return "Tenant: " + tenantID + ", Name: " + name + ", Phone: " + phone;
-    }
+    // Setter (nếu cần)
+    public void setNgayThue(LocalDate ngayThue) { this.ngayThue = ngayThue; }
 }
