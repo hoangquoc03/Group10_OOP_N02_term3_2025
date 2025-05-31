@@ -1,31 +1,147 @@
-
-//import test.testrentalroom;
+import java.util.Scanner;
 import models.Landlord;
-//import test.testRoom;
 import models.Room;
 import models.Tenant;
 import models.CrudManager;
-import models.Identifiable;
+
 public class App {
-    public static void main(String[] args) throws Exception {
-        // Phan du lieu o duoi minh cho vao file test như TestTanant
-        // Tenant tenant1 = new Tenant("T001", "Nguyen Van A", "0987654321");
-        // tenant1.displayInfo();
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         CrudManager<Landlord> landlordManager = new CrudManager<>();
-        landlordManager.create(new Landlord("L1", "A", "0912345678"));
-        landlordManager.create(new Landlord("L2", "B", "0987654321"));
-        landlordManager.readAll();
-        landlordManager.update("L1", new Landlord("L1", "A Updated", "0999999999"));
-        landlordManager.delete("L2");
-
-        System.out.println("\nQuản lý phòng:");
         CrudManager<Room> roomManager = new CrudManager<>();
-        roomManager.create(new Room("R1", 1000));
-        roomManager.readAll();
 
-        System.out.println("\nQuản lý tenant:");
-        CrudManager<Tenant> tenantManager = new CrudManager<>();
-        tenantManager.create(new Tenant("T1", "Nguyen Van A", "0123456789"));
-        tenantManager.readAll();
+        System.out.print("Bạn muốn nhập bao nhiêu phòng hôm nay? ");
+        int soPhong = Integer.parseInt(scanner.nextLine());
+
+        for (int i = 0; i < soPhong; i++) {
+            System.out.println("\nNhập thông tin phòng thứ " + (i + 1) + ":");
+
+            String roomID;
+            while (true) {
+                System.out.print("Room ID: ");
+                roomID = scanner.nextLine().trim();
+                if (!roomID.isEmpty()) break;
+                System.out.println("Room ID không được để trống.");
+            }
+
+            double price;
+            while (true) {
+                System.out.print("Price: ");
+                try {
+                    price = Double.parseDouble(scanner.nextLine());
+                    if (price > 0) break;
+                    System.out.println("Giá phòng phải lớn hơn 0.");
+                } catch (NumberFormatException e) {
+                    System.out.println("Giá phòng phải là số.");
+                }
+            }
+
+            System.out.println("Nhập thông tin chủ trọ:");
+            String landlordID, landlordName, landlordPhone;
+            while (true) {
+                System.out.print("Landlord ID(CCCD): ");
+                landlordID = scanner.nextLine().trim();
+                if (!landlordID.isEmpty()) break;
+                System.out.println("Landlord ID không được để trống.");
+            }
+            while (true) {
+                System.out.print("Tên chủ trọ: ");
+                landlordName = scanner.nextLine().trim();
+                if (!landlordName.isEmpty()) break;
+                System.out.println("Tên không được để trống.");
+            }
+            while (true) {
+                System.out.print("SĐT chủ trọ: ");
+                landlordPhone = scanner.nextLine().trim();
+                if (!landlordPhone.isEmpty()) break;
+                System.out.println("SĐT không được để trống.");
+            }
+            Landlord landlord = new Landlord(landlordID, landlordName, landlordPhone);
+            landlordManager.create(landlord);
+
+            System.out.println("Nhập thông tin người thuê:");
+            String tenantID, tenantName, tenantPhone;
+            while (true) {
+                System.out.print("Tenant ID(CCCCD): ");
+                tenantID = scanner.nextLine().trim();
+                if (!tenantID.isEmpty()) break;
+                System.out.println("Tenant ID không được để trống.");
+            }
+            while (true) {
+                System.out.print("Tên người thuê: ");
+                tenantName = scanner.nextLine().trim();
+                if (!tenantName.isEmpty()) break;
+                System.out.println("Tên không được để trống.");
+            }
+            while (true) {
+                System.out.print("SĐT người thuê: ");
+                tenantPhone = scanner.nextLine().trim();
+                if (!tenantPhone.isEmpty()) break;
+                System.out.println("SĐT không được để trống.");
+            }
+            Tenant tenant = new Tenant(tenantID, tenantName, tenantPhone);
+
+            Room room = new Room(roomID, price, landlord, tenant);
+            roomManager.create(room);
+        }
+
+        // Hiển thị danh sách phòng
+        System.out.println("\n--- DANH SÁCH PHÒNG ---");
+        hienThiBangPhong(roomManager);
+
+        // Tìm kiếm người thuê
+        String keyword;
+        boolean tiepTucTim;
+        do {
+            System.out.println("\nNhập thông tin người thuê cần tìm kiếm (ID hoặc tên):");
+            keyword = scanner.nextLine().trim().toLowerCase();
+
+            boolean found = false;
+            System.out.printf("%-10s %-10s %-20s %-15s %-20s %-15s\n",
+                "Room ID", "Price", "Landlord Name", "Phone", "Tenant Name", "Phone");
+            System.out.println("------------------------------------------------------------------------------------------");
+
+            for (Room room : roomManager.getItems()) {
+                Tenant tenant = room.getTenant();
+                if (tenant.getID().toLowerCase().contains(keyword) || tenant.getName().toLowerCase().contains(keyword)) {
+                    System.out.printf("%-10s %-10.2f %-20s %-15s %-20s %-15s\n",
+                        room.getID(),
+                        room.getPrice(),
+                        room.getLandlord().getName(),
+                        room.getLandlord().getSdt(),
+                        tenant.getName(),
+                        tenant.getPhone()
+                    );
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                System.out.println("Không tìm thấy người thuê phù hợp với từ khóa: " + keyword);
+            }
+
+            System.out.print("Bạn có muốn tìm tiếp không? (y/n): ");
+            String luaChon = scanner.nextLine().trim().toLowerCase();
+            tiepTucTim = luaChon.equals("y");
+
+        } while (tiepTucTim);
+    }
+
+    //  HÀM hiển thị bảng phòng
+    public static void hienThiBangPhong(CrudManager<Room> roomManager) {
+        System.out.printf("%-10s %-10s %-20s %-15s %-20s %-15s\n",
+            "Room ID", "Price", "Landlord Name", "Phone", "Tenant Name", "Phone");
+        System.out.println("------------------------------------------------------------------------------------------");
+
+        for (Room room : roomManager.getItems()) {
+            System.out.printf("%-10s %-10.2f %-20s %-15s %-20s %-15s\n",
+                room.getID(),
+                room.getPrice(),
+                room.getLandlord().getName(),
+                room.getLandlord().getSdt(),
+                room.getTenant().getName(),
+                room.getTenant().getPhone()
+            );
+        }
     }
 }

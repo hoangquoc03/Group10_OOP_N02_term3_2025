@@ -14,7 +14,13 @@ public class Tenant implements Identifiable {
     public String getID() {
         return tenantID;
     }
+    public String getName() {
+        return name;
+    }
 
+    public String getPhone() {
+        return phone;
+    }
     public String toString() {
         return "Tenant: " + tenantID + ", Name: " + name + ", Phone: " + phone;
     }
