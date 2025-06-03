@@ -25,5 +25,9 @@ public class App {
 
         // Kiểm tra nếu hôm nay là ngày đóng tiền tháng mới
         Search.hienThiPhongDenNgayDongTien(roomManager);
+
+        // Tìm kiếm giá phòng
+        Search.timKiemTheoGiaPhong(roomManager);
+
     }
 }
