@@ -57,3 +57,4 @@ Yêu cầu:
  <img src ="img/group10noidung3.png">
  
 Lưu đồ thuật toán :(kiemTraNgayDongTien())
+<img src ="img/thuattoan.png">
