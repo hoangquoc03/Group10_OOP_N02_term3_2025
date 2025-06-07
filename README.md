@@ -56,4 +56,4 @@ Yêu cầu:
  Sequence Diagram
  <img src ="img/group10noidung3.png">
  
-Lưu đồ thuật toán :
+Lưu đồ thuật toán :(kiemTraNgayDongTien())
