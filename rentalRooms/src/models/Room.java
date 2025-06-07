@@ -49,4 +49,4 @@ public class Room implements Identifiable {
                ", Landlord: [" + landlord + "]" +
                ", Tenant: [" + tenant + "]";
     }
-}
+} 
