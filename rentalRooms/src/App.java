@@ -28,6 +28,5 @@ public class App {
 
         // Tìm kiếm giá phòng
         Search.timKiemTheoGiaPhong(roomManager);
-
     }
 }
