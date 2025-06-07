@@ -38,6 +38,14 @@ public class PrintList {
                 if (!roomID.isEmpty()) break;
                 System.out.println("Room ID không được để trống.");
             }
+            String roomAddress;
+            while (true) {
+                System.out.print("Địa chỉ phòng: ");
+                roomAddress = scanner.nextLine().trim();
+                if (!roomAddress.isEmpty()) break;
+                System.out.println("Địa chỉ không được để trống.");
+                }
+
 
             double price;
             while (true) {
@@ -115,7 +123,9 @@ public class PrintList {
             }
             Tenant tenant = new Tenant(tenantID, tenantName, tenantPhone, ngayThue);
 
-            Room room = new Room(roomID, price, landlord, tenant);
+            
+            Room room = new Room(roomID, price, landlord, tenant, roomAddress);
+
             roomManager.create(room);
         }
         return roomManager;

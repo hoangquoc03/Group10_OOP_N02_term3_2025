@@ -18,15 +18,16 @@ public class Search {
             keyword = scanner.nextLine().trim().toLowerCase();
 
             boolean found = false;
-            System.out.printf("%-10s %-10s %-20s %-15s %-15s %-12s %-20s %-15s %-12s\n",
-                "Room ID", "Price", "Landlord Name", "Phone", "Address", "Tenant ID", "Tenant Name", "Phone", "Ngày thuê");
+                System.out.printf("%-10s %-10s %-20s %-15s %-20s %-15s %-12s %-20s %-15s %-12s\n",
+                    "Room ID" , "Room Address", "Price", "Landlord Name", "Phone", "Address", "Tenant ID", "Tenant Name", "Phone", "Ngày thuê");
             System.out.println("----------------------------------------------------------------------------------------------------");
 
             for (Room room : roomManager.getItems()) {
                 Tenant tenant = room.getTenant();
                 if (tenant.getID().toLowerCase().contains(keyword) || tenant.getName().toLowerCase().contains(keyword)) {
-                    System.out.printf("%-10s %-10.2f %-20s %-15s %-15s %-12s %-20s %-15s %-12s\n",
+                    System.out.printf("%-10s %-10s %-10.2f %-20s %-15s %-15s %-12s %-20s %-15s %-12s\n",
                         room.getID(),
+                        room.getAddress(),
                         room.getPrice(),
                         room.getLandlord().getName(),
                         room.getLandlord().getSdt(),
@@ -58,8 +59,8 @@ public class Search {
         int thresholdDays = 5;  // Số ngày sắp đến hạn
 
         System.out.println("\n--- PHÒNG SẮP ĐẾN HẠN ĐÓNG TIỀN TRỌ (trong vòng " + thresholdDays + " ngày tới) ---");
-        System.out.printf("%-10s %-10s %-20s %-15s %-15s %-12s %-20s %-15s %-12s\n",
-            "Room ID", "Price", "Landlord Name", "Phone", "Address", "Tenant ID", "Tenant Name", "Phone", "Ngày thuê");
+        System.out.printf("%-10s %-10s %-20s %-15s %-20s %-15s %-12s %-20s %-15s %-12s\n",
+            "Room ID","Room Address", "Price", "Landlord Name", "Phone", "Address", "Tenant ID", "Tenant Name", "Phone", "Ngày thuê");
         System.out.println("----------------------------------------------------------------------------------------------------");
 
         for (Room room : roomManager.getItems()) {
@@ -74,8 +75,9 @@ public class Search {
             long daysToDue = 30 - daysPassedInCycle;    // số ngày còn lại đến hạn đóng tiền
 
             if (daysToDue <= thresholdDays && daysToDue > 0) {
-                System.out.printf("%-10s %-10.2f %-20s %-15s %-15s %-12s %-20s %-15s %-12s\n",
+                System.out.printf("%-10s %-10s %-10.2f %-20s %-15s %-15s %-12s %-20s %-15s %-12s\n",
                     room.getID(),
+                    room.getAddress(),
                     room.getPrice(),
                     room.getLandlord().getName(),
                     room.getLandlord().getSdt(),
@@ -100,8 +102,8 @@ public class Search {
         boolean found = false;
 
         System.out.println("\n--- PHÒNG ĐẾN HẠN ĐÓNG TIỀN TRỌ (30 ngày mỗi tháng) ---");
-        System.out.printf("%-10s %-10s %-20s %-15s %-15s %-12s %-20s %-15s %-12s\n",
-            "Room ID", "Price", "Landlord Name", "Phone", "Address", "Tenant ID", "Tenant Name", "Phone", "Ngày thuê");
+        System.out.printf("%-10s %-10s %-20s %-15s %-20s %-15s %-12s %-20s %-15s %-12s\n",
+            "Room ID","Room Address", "Price", "Landlord Name", "Phone", "Address", "Tenant ID", "Tenant Name", "Phone", "Ngày thuê");
         System.out.println("----------------------------------------------------------------------------------------------------");
 
         for (Room room : roomManager.getItems()) {
@@ -118,8 +120,9 @@ public class Search {
             LocalDate lastPaymentDue = nextPaymentDate.minusDays(30);
 
             if (lastPaymentDue.equals(today)) {
-                System.out.printf("%-10s %-10.2f %-20s %-15s %-15s %-12s %-20s %-15s %-12s\n",
+                System.out.printf("%-10s %-10s %-10.2f %-20s %-15s %-15s %-12s %-20s %-15s %-12s\n",
                     room.getID(),
+                    room.getAddress(),
                     room.getPrice(),
                     room.getLandlord().getName(),
                     room.getLandlord().getSdt(),
@@ -161,16 +164,17 @@ public class Search {
             }
 
             boolean found = false;
-            System.out.printf("%-10s %-10s %-20s %-15s %-15s %-12s %-20s %-15s %-12s\n",
-                "Room ID", "Price", "Landlord Name", "Phone", "Address", "Tenant ID", "Tenant Name", "Phone", "Ngày thuê");
+            System.out.printf("%-10s %-10s %-20s %-15s %-20s %-15s %-12s %-20s %-15s %-12s\n",
+                "Room ID","Room Address", "Price", "Landlord Name", "Phone", "Address", "Tenant ID", "Tenant Name", "Phone", "Ngày thuê");
             System.out.println("----------------------------------------------------------------------------------------------------");
 
             for (Room room : roomManager.getItems()) {
                 double price = room.getPrice();
                 if (price >= min && price <= max) {
                     Tenant tenant = room.getTenant();
-                    System.out.printf("%-10s %-10.2f %-20s %-15s %-15s %-12s %-20s %-15s %-12s\n",
+                    System.out.printf("%-10s %-10s %-10.2f %-20s %-15s %-15s %-12s %-20s %-15s %-12s\n",
                         room.getID(),
+                        room.getAddress(),
                         price,
                         room.getLandlord().getName(),
                         room.getLandlord().getSdt(),
