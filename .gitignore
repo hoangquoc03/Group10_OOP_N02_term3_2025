@@ -1,0 +1,5 @@
+# Ignore build directory
+target/
+
+# Ignore all .properties files (may contain secrets)
+*.properties
