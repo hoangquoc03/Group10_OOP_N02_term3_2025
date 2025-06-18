@@ -1,10 +1,7 @@
 package models;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 
-=======
->>>>>>> 36fae42 (updateInterface)
 public class Room implements Identifiable {
     private String roomID;
     private double price;
@@ -12,7 +9,6 @@ public class Room implements Identifiable {
     private Tenant tenant;
     private String address;
 
-<<<<<<< HEAD
     // Danh sách các phòng
     private static ArrayList<Room> roomList = new ArrayList<>();
 
@@ -26,14 +22,11 @@ public class Room implements Identifiable {
     }
 
     // Constructor đơn giản để test nhanh
-=======
->>>>>>> 36fae42 (updateInterface)
     public Room(String roomID, double price) {
         this.roomID = roomID;
         this.price = price;
     }
 
-<<<<<<< HEAD
     // Getter và Setter
     @Override
     public String getID() {
@@ -118,14 +111,6 @@ public class Room implements Identifiable {
         for (Room room : roomList) {
             System.out.println(room);
         }
-=======
-    public String getID() {
-        return roomID;
-    }
-
-    public String toString() {
-        return "Room ID: " + roomID + ", Price: " + price;
->>>>>>> 36fae42 (updateInterface)
     }
 
     // Hiển thị thông tin phòng đơn (test)
