@@ -2,6 +2,7 @@ package test;
 
 import models.Landlord;
 
+<<<<<<< HEAD
 public class LandlordTest {
     public static void main(String[] args) {
         // Thêm Landlord
@@ -34,3 +35,8 @@ public class LandlordTest {
         Landlord.printinfo();
     }
 }
+=======
+public class testLandlord {
+    
+}
+>>>>>>> 36fae42 (updateInterface)

@@ -1,10 +1,15 @@
 package models;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
 public class Landlord implements Identifiable {
     private String id;
+=======
+public class Landlord implements Identifiable {
+    private String landlordID;
+>>>>>>> 36fae42 (updateInterface)
     private String name;
     private String sdt;
     private String diaChi;
@@ -27,6 +32,7 @@ public class Landlord implements Identifiable {
         return id;
     }
 
+<<<<<<< HEAD
     public String getLandlordID() {
         return id;
     }
@@ -121,4 +127,13 @@ public class Landlord implements Identifiable {
         System.out.println("\nDanh sách sau khi xóa:");
         readAllLandlords();
     }
+=======
+    public String getID() {
+        return landlordID;
+    }
+
+    public String toString() {
+        return "Landlord: " + landlordID + ", Name: " + name + ", SĐT: " + sdt;
+    }
+>>>>>>> 36fae42 (updateInterface)
 }
