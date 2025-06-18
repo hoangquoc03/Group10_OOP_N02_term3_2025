@@ -3,13 +3,9 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-
-=======
 /**
  * Lớp tổng quát quản lý CRUD cho mọi đối tượng có ID (Identifiable)
  */
->>>>>>> 36fae42 (updateInterface)
 public class CrudManager<T extends Identifiable> {
     private List<T> items = new ArrayList<>();
 
@@ -53,11 +49,9 @@ public class CrudManager<T extends Identifiable> {
         }
         System.out.println("Không tìm thấy ID: " + id);
     }
-<<<<<<< HEAD
-    
+
+    // Trả về danh sách đối tượng
     public List<T> getItems() {
         return items;
     }
-=======
->>>>>>> 36fae42 (updateInterface)
-} 
+}

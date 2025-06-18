@@ -1,42 +1,28 @@
 package models;
 
-<<<<<<< HEAD
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Tenant implements Identifiable {
-    private String id; // dùng chung cho mọi constructor
-=======
-public class Tenant implements Identifiable {
-    private String tenantID;
->>>>>>> 36fae42 (updateInterface)
+    private String id;
     private String name;
     private String phone;
     private LocalDate ngayThue; // ngày thuê
 
-<<<<<<< HEAD
     // Danh sách tenant
     private static ArrayList<Tenant> tenantList = new ArrayList<>();
 
     // Constructor đầy đủ
     public Tenant(String id, String name, String phone, LocalDate ngayThue) {
         this.id = id;
-=======
-    public Tenant(String tenantID, String name, String phone) {
-        this.tenantID = tenantID;
->>>>>>> 36fae42 (updateInterface)
         this.name = name;
         this.phone = phone;
         this.ngayThue = ngayThue;
     }
 
-<<<<<<< HEAD
     // Constructor không có ngày thuê (test/sample)
     public Tenant(String id, String name, String phone) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.ngayThue = null;
+        this(id, name, phone, null);
     }
 
     // Implement từ interface Identifiable
@@ -127,14 +113,6 @@ public class Tenant implements Identifiable {
         for (Tenant tenant : tenantList) {
             tenant.displayInfo();
         }
-=======
-    public String getID() {
-        return tenantID;
-    }
-
-    public String toString() {
-        return "Tenant: " + tenantID + ", Name: " + name + ", Phone: " + phone;
->>>>>>> 36fae42 (updateInterface)
     }
 
     // Tenant mẫu (test nhanh)
