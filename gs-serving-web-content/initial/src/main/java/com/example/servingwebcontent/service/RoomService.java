@@ -1,4 +1,4 @@
-package com.example.servingwebcontent.repository;
+package com.example.servingwebcontent.service;
 
 import com.example.servingwebcontent.model.Room;
 import org.springframework.stereotype.Repository;
