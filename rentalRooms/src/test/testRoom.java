@@ -3,7 +3,6 @@ package test;
 import models.Room;  // Đảm bảo bạn import đúng tên class (Room viết hoa)
 
 public class testRoom {
-<<<<<<< HEAD
 
     public static void main(String[] args) {
         // Test hàm hienthiphong() riêng lẻ
@@ -37,7 +36,4 @@ public class testRoom {
         System.out.println("Hiển thị thông tin phòng: " + id + " | Số tiền: " + price);
         System.out.println("Test:");
     }
-=======
-    
->>>>>>> 36fae42 (updateInterface)
 }
