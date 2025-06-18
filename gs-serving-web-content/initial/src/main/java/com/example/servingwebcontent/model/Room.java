@@ -1,35 +1,35 @@
 package com.example.servingwebcontent.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Room {
     private String id;
-    private String name;
     private double price;
-    private String tenant;
+    private String address;
+    private String landlordName;
+    private String tenantName;
+    private LocalDate paymentDate;
 
-    public Room() {}
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public Room(String id, String name, double price, String tenant) {
+    // Constructor đầy đủ
+    public Room(String id, double price, String address, String landlordName, String tenantName, String paymentDate) {
         this.id = id;
-        this.name = name;
         this.price = price;
-        this.tenant = tenant;
+        this.address = address;
+        this.landlordName = landlordName;
+        this.tenantName = tenantName;
+        this.paymentDate = LocalDate.parse(paymentDate, formatter);
     }
 
-    // Getter và Setter
+    // Getters và Setters
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getPrice() {
@@ -40,11 +40,40 @@ public class Room {
         this.price = price;
     }
 
-    public String getTenant() {
-        return tenant;
+    public String getAddress() {
+        return address;
     }
 
-    public void setTenant(String tenant) {
-        this.tenant = tenant;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getLandlordName() {
+        return landlordName;
+    }
+
+    public void setLandlordName(String landlordName) {
+        this.landlordName = landlordName;
+    }
+
+    public String getTenantName() {
+        return tenantName;
+    }
+
+    public void setTenantName(String tenantName) {
+        this.tenantName = tenantName;
+    }
+
+    public LocalDate getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    // Trả về chuỗi ngày dạng yyyy-MM-dd để hiển thị trong HTML
+    public String getFormattedPaymentDate() {
+        return paymentDate.format(formatter);
     }
 }
