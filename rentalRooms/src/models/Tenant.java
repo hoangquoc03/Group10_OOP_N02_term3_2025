@@ -9,10 +9,8 @@ public class Tenant implements Identifiable {
     private String phone;
     private LocalDate ngayThue; // ngày thuê
 
-    // Danh sách tenant
     private static ArrayList<Tenant> tenantList = new ArrayList<>();
 
-    // Constructor đầy đủ
     public Tenant(String id, String name, String phone, LocalDate ngayThue) {
         this.id = id;
         this.name = name;
@@ -20,18 +18,15 @@ public class Tenant implements Identifiable {
         this.ngayThue = ngayThue;
     }
 
-    // Constructor không có ngày thuê (test/sample)
     public Tenant(String id, String name, String phone) {
         this(id, name, phone, null);
     }
 
-    // Implement từ interface Identifiable
     @Override
     public String getID() {
         return id;
     }
 
-    // Getter
     public String getName() {
         return name;
     }
@@ -44,7 +39,6 @@ public class Tenant implements Identifiable {
         return ngayThue;
     }
 
-    // Setter
     public void setName(String name) {
         this.name = name;
     }
@@ -57,67 +51,117 @@ public class Tenant implements Identifiable {
         this.ngayThue = ngayThue;
     }
 
-    // Hiển thị thông tin tenant
     public void displayInfo() {
         System.out.println("Tenant ID: " + id + ", Name: " + name + ", Phone: " + phone +
-            (ngayThue != null ? ", Ngày thuê: " + ngayThue : ""));
+                (ngayThue != null ? ", Ngày thuê: " + ngayThue : ""));
     }
 
-    // Override toString
     @Override
     public String toString() {
         return "Tenant ID: " + id + ", Name: " + name + ", Phone: " + phone +
-            (ngayThue != null ? ", Ngày thuê: " + ngayThue : "");
+                (ngayThue != null ? ", Ngày thuê: " + ngayThue : "");
     }
 
-    // Thêm tenant vào danh sách
+    // ---------------------------
+    // STATIC METHODS WITH TRY-CATCH
+    // ---------------------------
+
     public static void addTenant(Tenant tenant) {
-        tenantList.add(tenant);
-        System.out.println("Đã thêm tenant: " + tenant.getID());
+        try {
+            tenantList.add(tenant);
+            System.out.println("Đã thêm tenant: " + tenant.getID());
+        } catch (Exception e) {
+            System.out.println("Lỗi khi thêm tenant: " + e.getMessage());
+        } finally {
+            System.out.println("Thực hiện thêm tenant xong.");
+        }
     }
 
-    // Cập nhật tenant theo ID
     public static boolean updateTenant(String tenantID, String newName, String newPhone) {
-        for (Tenant tenant : tenantList) {
-            if (tenant.getID().equals(tenantID)) {
-                tenant.setName(newName);
-                tenant.setPhone(newPhone);
-                System.out.println("Đã cập nhật tenant: " + tenantID);
-                return true;
+        try {
+            for (Tenant tenant : tenantList) {
+                if (tenant.getID().equals(tenantID)) {
+                    tenant.setName(newName);
+                    tenant.setPhone(newPhone);
+                    System.out.println("Đã cập nhật tenant: " + tenantID);
+                    return true;
+                }
             }
+            System.out.println("Không tìm thấy tenant với ID: " + tenantID);
+        } catch (Exception e) {
+            System.out.println("Lỗi khi cập nhật tenant: " + e.getMessage());
+        } finally {
+            System.out.println("Thực hiện cập nhật tenant xong.");
         }
-        System.out.println("Không tìm thấy tenant với ID: " + tenantID);
         return false;
     }
 
-    // Xóa tenant theo ID
     public static boolean deleteTenant(String tenantID) {
-        for (Tenant tenant : tenantList) {
-            if (tenant.getID().equals(tenantID)) {
-                tenantList.remove(tenant);
-                System.out.println("Đã xóa tenant: " + tenantID);
-                return true;
+        try {
+            for (Tenant tenant : tenantList) {
+                if (tenant.getID().equals(tenantID)) {
+                    tenantList.remove(tenant);
+                    System.out.println("Đã xóa tenant: " + tenantID);
+                    return true;
+                }
             }
+            System.out.println("Không tìm thấy tenant để xóa với ID: " + tenantID);
+        } catch (Exception e) {
+            System.out.println("Lỗi khi xóa tenant: " + e.getMessage());
+        } finally {
+            System.out.println("Thực hiện xóa tenant xong.");
         }
-        System.out.println("Không tìm thấy tenant để xóa với ID: " + tenantID);
         return false;
     }
 
-    // Hiển thị tất cả tenants
     public static void displayTenants() {
-        if (tenantList.isEmpty()) {
-            System.out.println("Danh sách tenant đang rỗng.");
-            return;
-        }
-        System.out.println("Danh sách tenant:");
-        for (Tenant tenant : tenantList) {
-            tenant.displayInfo();
+        try {
+            if (tenantList.isEmpty()) {
+                System.out.println("Danh sách tenant đang rỗng.");
+                return;
+            }
+            System.out.println("Danh sách tenant:");
+            for (Tenant tenant : tenantList) {
+                tenant.displayInfo();
+            }
+        } catch (Exception e) {
+            System.out.println("Lỗi khi hiển thị tenants: " + e.getMessage());
+        } finally {
+            System.out.println("Kết thúc hiển thị danh sách tenants.");
         }
     }
 
-    // Tenant mẫu (test nhanh)
     public static void printSampleTenant() {
-        Tenant t = new Tenant("T001", "Nguyen Van A", "0987654321");
-        t.displayInfo();
+        try {
+            Tenant t = new Tenant("T001", "Nguyen Van A", "0987654321");
+            t.displayInfo();
+        } catch (Exception e) {
+            System.out.println("Lỗi khi in tenant mẫu: " + e.getMessage());
+        } finally {
+            System.out.println("Hoàn thành in tenant mẫu.");
+        }
+    }
+
+    // ---------------------------
+    // CÁC PHƯƠNG THỨC DÙNG CHO TEST FILE
+    // ---------------------------
+
+    public static void createTenant(String id, String name, String phone) {
+        try {
+            Tenant newTenant = new Tenant(id, name, phone);
+            addTenant(newTenant);
+        } catch (Exception e) {
+            System.out.println("Lỗi khi tạo tenant từ createTenant(): " + e.getMessage());
+        } finally {
+            System.out.println("Kết thúc createTenant().");
+        }
+    }
+
+    public static void readAllTenants() {
+        displayTenants();
+    }
+
+    public static void printinfo() {
+        printSampleTenant();
     }
 }
