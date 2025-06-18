@@ -1,21 +1,22 @@
-# Group 10 OOP N02 TERM 3 2025
+# Quản lý nhà trọ - Group 10 OOP N02 TERM 3 2025
 
-**Group 10: OOP Term 3 2025 - K17**
-
-## Thành viên
+## Nhóm thực hiện
 - Đặng Thanh Tùng  
 - Lê Hồng Quốc  
 - Lê Quang Thắng  
 
-## Tiêu đề
-**Quản lý nhà trọ**
-
-## Giới thiệu Project (README)
-[Link đến GitHub Repository](https://github.com/hoangquoc03/Group10_OOP_N02_term3_2025)
+## Repository
+🔗 [GitHub Repository](https://github.com/hoangquoc03/Group10_OOP_N02_term3_2025)
 
 ---
 
-## Đối tượng
+## 🏠 Giới thiệu Dự án
+
+Ứng dụng **Quản lý phòng trọ** giúp quản lý thông tin về người thuê, phòng trọ và chủ nhà, xây dựng bằng **Java Spring Boot**, sử dụng **file nhị phân** để lưu dữ liệu và các collection trong Java như `ArrayList`, `LinkedList`, `Map`.
+
+---
+
+## 📦 Mô hình đối tượng
 
 ```java
 class Room {
@@ -35,19 +36,13 @@ class Landlord {
     String nameL;
     String phoneLandlord;
 }
+Chức năng chính
+🔸 Quản lý Người thuê (Tenant)
+Thêm, sửa, xoá tenant
 
-Yêu cầu số 3
-Nội dung 01: Xây dựng ứng dụng Quản lý phòng trọ
-Yêu cầu:
-Giao diện sử dụng Java Spring Boot
+Liệt kê thông tin tenant: nameT, nameID, phoneTenant
 
-Chức năng quản lý Người thuê (Tenant):
-
-Thêm, sửa, xoá Tenant
-
-Liệt kê thông tin: name, nameID, phoneTenant
-
-Lọc theo:
+Lọc tenant theo:
 
 Tên (nameT)
 
@@ -55,31 +50,33 @@ Số điện thoại (phoneTenant)
 
 Mã người thuê (nameID)
 
-Chức năng quản lý Phòng trọ (Room):
-
-Thêm, sửa, xoá Room
+🔸 Quản lý Phòng trọ (Room)
+Thêm, sửa, xoá phòng
 
 Gán Tenant cho Room
 
-Mỗi Room chỉ được gán cho một Tenant tại một thời điểm
+Mỗi phòng chỉ có 1 tenant tại một thời điểm
 
-Lưu trữ dữ liệu bằng file nhị phân
+🔸 Quản lý Chủ nhà (Landlord)
+Thêm, sửa, xoá thông tin chủ nhà
 
-Tạo các lớp Room, Tenant, Landlord để đọc/ghi dữ liệu
+💾 Lưu trữ dữ liệu
+Dữ liệu được lưu dưới dạng file nhị phân
 
-Sử dụng các lớp TenantService, RoomService, LandlordService để thao tác dữ liệu
+Dùng các class Room, Tenant, Landlord để đọc/ghi file
 
-Dữ liệu trong bộ nhớ lưu trữ dưới dạng các Collection như:
+Sử dụng các lớp RoomService, TenantService, LandlordService để thao tác dữ liệu
+
+Dữ liệu trong bộ nhớ được lưu dưới dạng:
 
 ArrayList<Room>
 
 LinkedList<Tenant>
 
-Map, ...
+Map<String, Landlord>
 
-Sinh viên có thể tự thêm chức năng nâng cao để mở rộng ứng dụng (tuỳ chọn)
-Nội dung 02:
-Sequence Diagram:
-<img src="img/group10noidung2.png" alt="Sequence Diagram 1"> <img src="img/group10noidung3.png" alt="Sequence Diagram 2">
-Lưu đồ thuật toán: kiemTraNgayDongTien()
-<img src="img/thuattoan.png" alt="Flowchart Algorithm"> ```
+📈 Sơ đồ & Thuật toán
+🔹 Sequence Diagram
+<img src="img/group10noidung2.png" alt="Sequence Diagram 1" width="400"/> <img src="img/group10noidung3.png" alt="Sequence Diagram 2" width="400"/>
+🔹 Lưu đồ thuật toán: kiemTraNgayDongTien()
+<img src="img/bai7_room-Le-hong-quoc.png" alt="Flowchart Algorithm" width="600"/>
