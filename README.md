@@ -21,9 +21,10 @@
  <img src="img/thuattoanbai5.png" alt="Sequence Diagram 2" width="400"/>
  🔹bài 7 LÊ Hồng Quốc:
 <img src="img/bai7_room-Le-hong-quoc.png" alt="Flowchart Algorithm" width="600"/>
+
 Giao diện Chủ phòng bài 7 Lê Quang Thắng
 
-<img src="img/landlord.png" alt="Giao diện landlord" width="600"/>
+<img src="img/Screenshot 2025-06-19 112440.png" alt="Giao diện landlord" width="600"/>
 
 ## 📦 Mô hình đối tượng
 
