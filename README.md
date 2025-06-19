@@ -65,6 +65,8 @@ Mỗi phòng chỉ có 1 tenant tại một thời điểm
 
 🔸 Quản lý Chủ nhà (Landlord)
 Thêm, sửa, xoá thông tin chủ nhà
+<img src="img/landlord.png" alt="Giao diện landlord" width="600"/>
+
 
 💾 Lưu trữ dữ liệu
 Dữ liệu được lưu dưới dạng file nhị phân
