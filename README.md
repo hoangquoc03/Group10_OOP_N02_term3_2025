@@ -15,9 +15,9 @@
 Ứng dụng **Quản lý phòng trọ** giúp quản lý thông tin về người thuê, phòng trọ và chủ nhà, xây dựng bằng **Java Spring Boot**, sử dụng **file nhị phân** để lưu dữ liệu và các collection trong Java như `ArrayList`, `LinkedList`, `Map`.
 
 ---
-🔹 Sequence Diagram
+## Sequence Diagram
 <img src="img/group10noidung2.png" alt="Sequence Diagram 1" width="400"/> <img src="img/group10noidung3.png" alt="Sequence Diagram 2" width="400"/>
-🔹 Lưu đồ thuật toán: kiemTraNgayDongTien()
+## Lưu đồ thuật toán: kiemTraNgayDongTien()
  <img src="img/thuattoanbai5.png" alt="Sequence Diagram 2" width="400"/>
  ## Lê Hồng Quốc : Giao diện list Room cho thuê  bài 7
 <img src="img/bai7_room-Le-hong-quoc.png" alt="Flowchart Algorithm" width="600"/>
