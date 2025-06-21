@@ -1,6 +1,6 @@
 package com.example.servingwebcontent.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,4 +21,5 @@ public class Tenant {
     }
 
     // Getters and Setters
+    
 }
