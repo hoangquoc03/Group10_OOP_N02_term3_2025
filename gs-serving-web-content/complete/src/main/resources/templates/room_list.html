@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách phòng gần đến hạn thanh toán</title>
+</head>
+<body>
+    <h1>Phòng gần đến hạn thanh toán</h1>
+    <table border="1">
+        <tr>
+            <th>Phòng</th>
+            <th>Giá</th>
+            <th>Ngày đến hạn</th>
+            <th>Trạng thái</th>
+        </tr>
+        <tr th:each="room : ${rooms}">
+            <td th:text="${room.roomNumber}"></td>
+            <td th:text="${room.price}"></td>
+            <td th:text="${room.dueDate}"></td>
+            <td th:text="${room.status}"></td>
+        </tr>
+    </table>
+</body>
+</html>
