@@ -18,9 +18,10 @@ public class RoomController {
 
     @GetMapping("/rooms/due")
     public String getRoomsNearDueDate(Model model) {
-        LocalDate threeDaysFromNow = LocalDate.now().plusDays(3);
-        List<Room> rooms = roomRepository.findByDueDateBefore(threeDaysFromNow);
+        LocalDate sevenDaysFromNow = LocalDate.now().plusDays(7);
+        List<Room> rooms = roomRepository.findByDueDateBefore(sevenDaysFromNow);
         model.addAttribute("rooms", rooms);
         return "room_list";
     }
+
 }
