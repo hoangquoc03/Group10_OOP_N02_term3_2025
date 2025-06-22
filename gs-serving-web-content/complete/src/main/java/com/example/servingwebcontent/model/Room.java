@@ -26,7 +26,7 @@ public class Room {
     private LocalDate rentedFrom;
 
     @Column(name = "due_date")
-    private LocalDateTime dueDate; // ✅ Giữ nguyên kiểu LocalDateTime
+    private LocalDateTime dueDate;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -38,7 +38,7 @@ public class Room {
         available, occupied, maintenance
     }
 
-    // ✅ Getters and Setters đồng bộ với kiểu dữ liệu
+    // Getters and setters
     public Integer getRoomId() {
         return roomId;
     }

@@ -8,13 +8,14 @@
 <body>
 <div class="container mt-4">
     <h2>Phòng sắp đến hạn thanh toán</h2>
-    
-    <!-- Debug xem số phòng có hay không -->
-    <p>Số phòng tìm được: <span th:text="${#lists.size(rooms)}"></span></p>
-    <p>Số phòng tìm được: <span th:text="${count}">0</span></p>
 
+    <p>Số phòng tìm được: <span th:text="${count}"></span></p>
 
-    <table class="table table-bordered">
+    <div th:if="${count == 0}">
+        <p><strong>Không có phòng nào sắp đến hạn.</strong></p>
+    </div>
+
+    <table class="table table-bordered" th:if="${count > 0}">
         <thead>
         <tr>
             <th>Mã phòng</th>
@@ -28,7 +29,7 @@
             <td th:text="${room.roomNumber}"></td>
             <td th:text="${room.price}"></td>
             <td th:text="${room.status}"></td>
-            <td th:text="${room.dueDate}"></td>
+            <td th:text="${#temporals.format(room.dueDate, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
     </table>
