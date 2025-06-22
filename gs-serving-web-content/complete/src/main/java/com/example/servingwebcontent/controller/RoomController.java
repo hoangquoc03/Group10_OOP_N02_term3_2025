@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,10 +19,17 @@ public class RoomController {
 
     @GetMapping("/rooms/due")
     public String getRoomsNearDueDate(Model model) {
-        LocalDate sevenDaysFromNow = LocalDate.now().plusDays(7);
-        List<Room> rooms = roomRepository.findByDueDateBefore(sevenDaysFromNow);
+        LocalDateTime now = LocalDate.now().atStartOfDay(); // 💡 Đảm bảo từ 00:00 hôm nay
+        LocalDateTime sevenDaysFromNow = now.plusDays(7);
+        List<Room> rooms = roomRepository.findByDueDateBetween(now, sevenDaysFromNow);
         model.addAttribute("rooms", rooms);
         return "room_list";
     }
 
+    @GetMapping("/rooms/all")
+    public String getAllRooms(Model model) {
+        List<Room> rooms = roomRepository.findAll();
+        model.addAttribute("rooms", rooms);
+        return "room_list";
+    }
 }
