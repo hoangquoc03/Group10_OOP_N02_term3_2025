@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface RoomRepository extends JpaRepository<Room, Integer> {
 
-    @Query(value = "SELECT * FROM rooms WHERE due_date BETWEEN :start AND :end", nativeQuery = true)
+    // ✅ Native query dùng BETWEEN thời gian
+    @Query(value = "SELECT * FROM rooms WHERE due_date IS NOT NULL AND due_date BETWEEN :start AND :end", nativeQuery = true)
     List<Room> findByDueDateBetween(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 }

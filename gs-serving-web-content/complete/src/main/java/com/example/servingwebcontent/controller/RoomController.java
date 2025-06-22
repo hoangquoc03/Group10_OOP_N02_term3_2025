@@ -16,10 +16,10 @@ public class RoomController {
     @Autowired
     private RoomRepository roomRepository;
 
-    // ✅ Danh sách phòng sắp đến hạn thanh toán (trong 7 ngày tới)
+    // ✅ Phòng sắp đến hạn thanh toán (7 ngày tới)
     @GetMapping("/rooms/due")
     public String getRoomsNearDueDate(Model model) {
-        // Tạo mốc thời gian từ 00:00 hôm nay đến 23:59:59 bảy ngày sau
+        // Tạo khoảng thời gian từ đầu hôm nay đến 23:59:59 sau 7 ngày
         LocalDateTime start = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
         LocalDateTime end = start.plusDays(7).withHour(23).withMinute(59).withSecond(59).withNano(0);
 
@@ -29,7 +29,7 @@ public class RoomController {
 
         System.out.println(">>> [DEBUG] Rooms found: " + rooms.size());
         for (Room room : rooms) {
-            System.out.println("Room: " + room.getRoomNumber() + ", Due Date: " + room.getDueDate());
+            System.out.println("Room: " + room.getRoomNumber() + " | Due Date: " + room.getDueDate());
         }
 
         model.addAttribute("rooms", rooms);
@@ -37,14 +37,14 @@ public class RoomController {
         return "room_list";
     }
 
-    // ✅ Hiển thị toàn bộ phòng
+    // ✅ Tất cả phòng
     @GetMapping("/rooms/all")
     public String getAllRooms(Model model) {
         List<Room> rooms = roomRepository.findAll();
 
-        System.out.println(">>> [DEBUG] Total rooms found: " + rooms.size());
+        System.out.println(">>> [DEBUG] Total rooms: " + rooms.size());
         for (Room room : rooms) {
-            System.out.println("Room: " + room.getRoomNumber() + ", Due Date: " + room.getDueDate());
+            System.out.println("Room: " + room.getRoomNumber() + " | Due Date: " + room.getDueDate());
         }
 
         model.addAttribute("rooms", rooms);
