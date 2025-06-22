@@ -34,6 +34,7 @@ public class RoomController {
 
         model.addAttribute("rooms", rooms);
         model.addAttribute("count", rooms.size());
+        model.addAttribute("title", "Phòng sắp đến hạn thanh toán"); // ✅ tiêu đề động
         return "room_list";
     }
 
@@ -49,6 +50,7 @@ public class RoomController {
 
         model.addAttribute("rooms", rooms);
         model.addAttribute("count", rooms.size());
+        model.addAttribute("title", "Tất cả phòng hiện có"); // ✅ tiêu đề động
         return "room_list";
     }
 }
