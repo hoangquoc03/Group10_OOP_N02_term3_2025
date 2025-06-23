@@ -187,25 +187,25 @@
               <div class="col-md-3">
                 <div class="card-box bg-primary">
                   <h5><i class="fas fa-user-shield"></i> Quản trị viên</h5>
-                  <h4 id="admin-count">0</h4>
+                  <h4 id="admin-count">Đang tải...</h4>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="card-box bg-success">
                   <h5><i class="fas fa-user-tie"></i> Chủ trọ</h5>
-                  <h4 id="landlord-count">0</h4>
+                  <h4 id="landlord-count">Đang tải...</h4>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="card-box bg-info">
                   <h5><i class="fas fa-user"></i> Người thuê</h5>
-                  <h4 id="tenant-count">0</h4>
+                  <h4 id="tenant-count">Đang tải...</h4>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="card-box bg-warning">
                   <h5><i class="fas fa-bed"></i> Phòng đang thuê</h5>
-                  <h4 id="occupied-room-count">0</h4>
+                  <h4 id="occupied-room-count">Đang tải...</h4>
                 </div>
               </div>
             </div>
@@ -224,28 +224,49 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       fetch('/api/admin/stats')
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) throw new Error("Không thể lấy dữ liệu");
+          return res.json();
+        })
         .then(data => {
-          document.getElementById('admin-count').innerText = data.admin;
-          document.getElementById('landlord-count').innerText = data.landlord;
-          document.getElementById('tenant-count').innerText = data.tenant;
-          document.getElementById('occupied-room-count').innerText = data.occupiedRoom;
+          // Đổ số liệu
+          document.getElementById('admin-count').innerText = data.admin ?? 0;
+          document.getElementById('landlord-count').innerText = data.landlord ?? 0;
+          document.getElementById('tenant-count').innerText = data.tenant ?? 0;
+          document.getElementById('occupied-room-count').innerText = data.occupiedRoom ?? 0;
   
-          new Chart(document.getElementById("myPieChart"), {
-            type: "pie",
-            data: {
-              labels: ["Admin", "Chủ trọ", "Người thuê"],
-              datasets: [{
-                data: [data.admin, data.landlord, data.tenant],
-                backgroundColor: ["#0d6efd", "#198754", "#0dcaf0"]
-              }]
-            }
-          });
+          // Hiển thị biểu đồ
+          const ctx = document.getElementById("myPieChart");
+          if (ctx) {
+            new Chart(ctx, {
+              type: "pie",
+              data: {
+                labels: ["Admin", "Chủ trọ", "Người thuê"],
+                datasets: [{
+                  data: [data.admin, data.landlord, data.tenant],
+                  backgroundColor: ["#0d6efd", "#198754", "#0dcaf0"],
+                }]
+              },
+              options: {
+                responsive: true,
+                plugins: {
+                  legend: {
+                    position: 'bottom'
+                  }
+                }
+              }
+            });
+          }
         })
         .catch(err => {
           console.error("Lỗi khi tải dữ liệu thống kê:", err);
+          document.getElementById('admin-count').innerText = 'Lỗi';
+          document.getElementById('landlord-count').innerText = 'Lỗi';
+          document.getElementById('tenant-count').innerText = 'Lỗi';
+          document.getElementById('occupied-room-count').innerText = 'Lỗi';
         });
     </script>
   </body>
+  
   </html>
   
