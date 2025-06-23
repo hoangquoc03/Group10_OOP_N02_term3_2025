@@ -8,6 +8,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String redirectToAdminDashboard() {
-        return "redirect:/admin"; // chuyển hướng sang /admin
+        return "redirect:/admin/admin_dashboard.html"; // chuyển hướng sang /admin
     }
 }
