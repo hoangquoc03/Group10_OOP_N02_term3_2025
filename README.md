@@ -36,11 +36,16 @@
 <img src="img/demo3.png" alt="Giao diện landlord" width="600"/>
 
 ## 📦 Mô hình đối tượng
-
-
 class Room {
     String roomID;
     double price;
+    status ENUM('available', 'occupied', 'maintenance'),
+    landlord_id INT,
+    tenant_id INT,
+    rented_from DATE,
+    due_date DATE,
+    created_at DATETIME,
+    updated_at DATETIME,
 }
 
 class Tenant {
@@ -55,20 +60,33 @@ class Landlord {
     String nameL;
     String phoneLandlord;
 }
-Chức năng chính
-🔸 Quản lý Người thuê (Tenant)
-Thêm, sửa, xoá tenant
+## 📋 Chức năng chính
 
-Liệt kê thông tin tenant: nameT, nameID, phoneTenant
+| Đối tượng   | Chức năng                                         |
+|-------------|--------------------------------------------------|
+| Tenant      | Thêm/Sửa/Xoá, Xem danh sách, Gán phòng           |
+| Room        | Thêm/Sửa/Xoá, Xem trạng thái, Gán tenant         |
+| Landlord    | Thêm/Sửa/Xoá, Quản lý danh sách phòng sở hữu     |
+| Contract    |  Quản lý hợp đồng thuê phòng                     |
+| Thống kê    | Thống kê số lượng người dùng, phòng đang thuê    |
 
-Mã người thuê (nameID)
+## 🧪 Kiểm thử & Xử lý lỗi
 
-🔸 Quản lý Phòng trọ (Room)
-Thêm, sửa, xoá phòng
+- Sử dụng `try-catch` để bắt lỗi khi thao tác với cơ sở dữ liệu hoặc dữ liệu không hợp lệ.
+- API REST sử dụng `ResponseEntity` để trả về mã lỗi HTTP phù hợp.
+- Ví dụ:
+try {
+    // logic
+} catch (Exception e) {
+    return ResponseEntity.status(500).body("Lỗi: " + e.getMessage());
+}
 
-Gán Tenant cho Room
+## ☁️ Kết nối Cơ sở dữ liệu:
 
-Mỗi phòng chỉ có 1 tenant tại một thời điểm
+- Cơ sở dữ liệu sử dụng: **MySQL trên nền tảng Aiven**
+- Cấu hình trong `application.properties`:
+spring.datasource.url=jdbc:mysql://mysql-1535c414-project-18.b.aivencloud.com:15714/db-onl?sslMode=REQUIRED&serverTimezone=Asia/Ho_Chi_Minh
+spring.datasource.username=avnadmin
+spring.datasource.password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
-🔸 Quản lý Chủ nhà (Landlord)
-Thêm, sửa, xoá thông tin chủ nhà
