@@ -16,11 +16,14 @@
 
 ---
 ## Sequence Diagram :
-<img src="img/sequenceDiagram.png" alt="Sequence Diagram 1" width="400"/> 
+
+<img src="img/sequenceDiagram.png" alt="Sequence Diagram 1" width="600"/> 
 ## Class Diagram :
-<img src="img/classDiagram.png" alt="Sequence Diagram 2" width="400"/>
+
+<img src="img/classDiagram.png" alt="Sequence Diagram 2" width="600"/>
 ## Lưu đồ thuật toán: Thống kê người dùng/phòng đang thuê
- <img src="img/thuattoann.png" alt="Sequence Diagram 2" width="400"/>
+
+ <img src="img/thuattoann.png" alt="Sequence Diagram 2" width="600"/>
 
 ## Lê Hồng Quốc : 
 <img src="img/demo1.png" alt="Flowchart Algorithm" width="600"/>
