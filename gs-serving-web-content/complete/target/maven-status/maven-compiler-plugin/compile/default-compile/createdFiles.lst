@@ -16,3 +16,4 @@ com/example/servingwebcontent/model/User.class
 com/example/servingwebcontent/repository/LandlordRepository.class
 com/example/servingwebcontent/controller/HomeController.class
 com/example/servingwebcontent/repository/TenantRepository.class
+com/example/servingwebcontent/service/LandlordService.class

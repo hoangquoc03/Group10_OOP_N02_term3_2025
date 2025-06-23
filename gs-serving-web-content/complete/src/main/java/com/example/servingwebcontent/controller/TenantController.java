@@ -2,29 +2,28 @@ package com.example.servingwebcontent.controller;
 
 import com.example.servingwebcontent.model.Tenant;
 import com.example.servingwebcontent.repository.TenantRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/tenants")
 public class TenantController {
 
-    @Autowired
-    private TenantRepository tenantRepository;
+    private final TenantRepository tenantRepository;
+
+    public TenantController(TenantRepository tenantRepository) {
+        this.tenantRepository = tenantRepository;
+    }
 
     @GetMapping
     public String listTenants(Model model) {
-        List<Tenant> tenants = tenantRepository.findAll();
-        model.addAttribute("tenants", tenants);
+        model.addAttribute("tenants", tenantRepository.findAll());
         return "tenant_list";
     }
 
-    @GetMapping("/create")
-    public String showCreateForm(Model model) {
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
         model.addAttribute("tenant", new Tenant());
         return "tenant_form";
     }
@@ -36,14 +35,13 @@ public class TenantController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editTenant(@PathVariable Long id, Model model) {
-        Tenant tenant = tenantRepository.findById(id).orElseThrow();
-        model.addAttribute("tenant", tenant);
+    public String showEditForm(@PathVariable Integer id, Model model) {
+        model.addAttribute("tenant", tenantRepository.findById(id).orElse(null));
         return "tenant_form";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteTenant(@PathVariable Long id) {
+    public String deleteTenant(@PathVariable Integer id) {
         tenantRepository.deleteById(id);
         return "redirect:/tenants";
     }
