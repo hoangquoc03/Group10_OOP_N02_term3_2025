@@ -16,32 +16,62 @@ public class UserController {
 
     @GetMapping
     public String listUsers(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
-        return "user_list"; // -> phải có file templates/user_list.html
+        try {
+            model.addAttribute("users", userService.getAllUsers());
+            return "user_list";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Không thể tải danh sách người dùng: " + e.getMessage());
+            return "error";
+        }
     }
 
     @GetMapping("/new")
     public String showForm(Model model) {
-        model.addAttribute("user", new User());
-        return "user_form"; // -> phải có file templates/user_form.html
+        try {
+            model.addAttribute("user", new User());
+            return "user_form";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Không thể hiển thị form: " + e.getMessage());
+            return "error";
+        }
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("user") User user) {
-        System.out.println("Saving user: " + user.getFullname()); // kiểm tra xem có chạy không
-        userService.saveUser(user);
-        return "redirect:/users";
+    public String save(@ModelAttribute("user") User user, Model model) {
+        try {
+            System.out.println("Saving user: " + user.getFullname());
+            userService.saveUser(user);
+            return "redirect:/users";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Lỗi khi lưu người dùng: " + e.getMessage());
+            return "error";
+        }
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
-        model.addAttribute("user", userService.getUserById(id));
-        return "user_form";
+        try {
+            User user = userService.getUserById(id);
+            if (user == null) {
+                model.addAttribute("errorMessage", "Không tìm thấy người dùng với ID: " + id);
+                return "error";
+            }
+            model.addAttribute("user", user);
+            return "user_form";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Lỗi khi chỉnh sửa người dùng: " + e.getMessage());
+            return "error";
+        }
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id) {
-        userService.deleteUser(id);
-        return "redirect:/users";
+    public String delete(@PathVariable Integer id, Model model) {
+        try {
+            userService.deleteUser(id);
+            return "redirect:/users";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Lỗi khi xóa người dùng: " + e.getMessage());
+            return "error";
+        }
     }
 }

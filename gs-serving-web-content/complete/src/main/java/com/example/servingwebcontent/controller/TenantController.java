@@ -18,21 +18,35 @@ public class TenantController {
 
     @GetMapping
     public String listTenants(Model model) {
-        model.addAttribute("tenants", tenantRepository.findAll());
+        try {
+            model.addAttribute("tenants", tenantRepository.findAll());
+        } catch (Exception e) {
+            model.addAttribute("error", "Lỗi khi tải danh sách người thuê: " + e.getMessage());
+        }
         return "tenant_list";
     }
 
     @GetMapping("/new")
     public String showAddForm(Model model) {
-        model.addAttribute("tenant", new Tenant());
+        try {
+            model.addAttribute("tenant", new Tenant());
+        } catch (Exception e) {
+            model.addAttribute("error", "Lỗi khi tạo form thêm mới: " + e.getMessage());
+        }
         return "tenant_form";
     }
 
     @PostMapping("/save")
-    public String saveTenant(@ModelAttribute Tenant tenant) {
-        tenantRepository.save(tenant);
+    public String saveTenant(@ModelAttribute Tenant tenant, Model model) {
+        try {
+            tenantRepository.save(tenant);
+        } catch (Exception e) {
+            model.addAttribute("error", "Lỗi khi lưu người thuê: " + e.getMessage());
+            return "tenant_form";
+        }
         return "redirect:/tenants";
     }
+
     @GetMapping("/add")
     public String redirectToAdd() {
         return "redirect:/tenants/new";
@@ -40,14 +54,31 @@ public class TenantController {
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Integer id, Model model) {
-        model.addAttribute("tenant",
-            tenantRepository.findById(id).orElse(new Tenant()));
+        try {
+            Tenant tenant = tenantRepository.findById(id).orElse(null);
+            if (tenant == null) {
+                model.addAttribute("error", "Không tìm thấy người thuê.");
+                return "redirect:/tenants";
+            }
+            model.addAttribute("tenant", tenant);
+        } catch (Exception e) {
+            model.addAttribute("error", "Lỗi khi tải thông tin người thuê: " + e.getMessage());
+            return "redirect:/tenants";
+        }
         return "tenant_form";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteTenant(@PathVariable Integer id) {
-        tenantRepository.deleteById(id);
+    public String deleteTenant(@PathVariable Integer id, Model model) {
+        try {
+            if (tenantRepository.existsById(id)) {
+                tenantRepository.deleteById(id);
+            } else {
+                model.addAttribute("error", "Không tìm thấy người thuê để xoá.");
+            }
+        } catch (Exception e) {
+            model.addAttribute("error", "Lỗi khi xoá người thuê: " + e.getMessage());
+        }
         return "redirect:/tenants";
     }
 }
