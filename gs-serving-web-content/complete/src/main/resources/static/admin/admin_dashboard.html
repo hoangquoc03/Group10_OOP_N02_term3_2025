@@ -158,59 +158,58 @@
   </head>
   
   <body>
-  <div class="container-fluid">
-    <div class="row">
-      <!-- Sidebar -->
-      <div class="col-md-2 sidebar text-center py-4">
-        <img src="/img/logo.png" class="logo" alt="Logo" />
-        <h5><strong>Nhà Trọ Admin</strong></h5>
-        <a href="/admin"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-        <a href="/users"><i class="fas fa-user-shield"></i> Quản lý người dùng</a>
-        <a href="/landlords"><i class="fas fa-user-tie"></i> Quản lý chủ trọ</a>
-        <a href="/tenants"><i class="fas fa-user"></i> Quản lý người thuê</a>
-        <a href="/rooms/all"><i class="fas fa-bed"></i> Quản lý phòng</a>
-        <a href="/rooms/due"><i class="fas fa-calendar-alt"></i> Phòng sắp đến hạn</a>
-      </div>
-  
-      <!-- Main content -->
-      <div class="col-md-10 p-0">
-        <!-- Top bar -->
-        <div class="topbar d-flex justify-content-end align-items-center">
-          <img src="/img/avatar.jpg" alt="Avatar" class="avatar" />
-          <span>Admin</span>
-          <a href="/logout" class="logout-link"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar text-center py-4">
+          <img src="/img/logo.png" class="logo" alt="Logo" />
+          <h5><strong>Nhà Trọ Admin</strong></h5>
+          <a href="/admin"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+          <a href="/users"><i class="fas fa-user-shield"></i> Quản lý người dùng</a>
+          <a href="/landlords"><i class="fas fa-user-tie"></i> Quản lý chủ trọ</a>
+          <a href="/tenants"><i class="fas fa-user"></i> Quản lý người thuê</a>
+          <a href="/rooms/all"><i class="fas fa-bed"></i> Quản lý phòng</a>
+          <a href="/rooms/due"><i class="fas fa-calendar-alt"></i> Phòng sắp đến hạn</a>
         </div>
   
-        <div class="p-4">
-          <div th:if="${body != null}" th:replace="${body}"></div>
-          <div th:if="${body == null}">
+        <!-- Main content -->
+        <div class="col-md-10 p-0">
+          <!-- Top bar -->
+          <div class="topbar d-flex justify-content-end align-items-center">
+            <img src="/img/avatar.jpg" alt="Avatar" class="avatar" />
+            <span>Admin</span>
+            <a href="/logout" class="logout-link"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+          </div>
+  
+          <div class="p-4">
             <h3>👥 Người dùng & Quản lý</h3>
             <div class="row mt-4">
               <div class="col-md-3">
                 <div class="card-box bg-primary">
                   <h5><i class="fas fa-user-shield"></i> Quản trị viên</h5>
-                  <h4>3</h4>
+                  <h4 id="admin-count">0</h4>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="card-box bg-success">
                   <h5><i class="fas fa-user-tie"></i> Chủ trọ</h5>
-                  <h4>7</h4>
+                  <h4 id="landlord-count">0</h4>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="card-box bg-info">
                   <h5><i class="fas fa-user"></i> Người thuê</h5>
-                  <h4>24</h4>
+                  <h4 id="tenant-count">0</h4>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="card-box bg-warning">
                   <h5><i class="fas fa-bed"></i> Phòng đang thuê</h5>
-                  <h4>18</h4>
+                  <h4 id="occupied-room-count">0</h4>
                 </div>
               </div>
             </div>
+  
             <!-- Chart Section -->
             <div class="chart-container mt-4">
               <h5>📊 Thống kê quản lý người dùng</h5>
@@ -220,25 +219,33 @@
         </div>
       </div>
     </div>
-  </div>
   
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    const ctx = document.getElementById("myPieChart");
-    if (ctx) {
-      new Chart(ctx, {
-        type: "pie",
-        data: {
-          labels: ["Admin", "Chủ trọ", "Người thuê"],
-          datasets: [{
-            data: [3, 7, 24],
-            backgroundColor: ["#0d6efd", "#198754", "#0dcaf0"],
-          }],
-        },
-      });
-    }
-  </script>
+    <!-- Chart.js + thống kê JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      fetch('/api/admin/stats')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('admin-count').innerText = data.admin;
+          document.getElementById('landlord-count').innerText = data.landlord;
+          document.getElementById('tenant-count').innerText = data.tenant;
+          document.getElementById('occupied-room-count').innerText = data.occupiedRoom;
+  
+          new Chart(document.getElementById("myPieChart"), {
+            type: "pie",
+            data: {
+              labels: ["Admin", "Chủ trọ", "Người thuê"],
+              datasets: [{
+                data: [data.admin, data.landlord, data.tenant],
+                backgroundColor: ["#0d6efd", "#198754", "#0dcaf0"]
+              }]
+            }
+          });
+        })
+        .catch(err => {
+          console.error("Lỗi khi tải dữ liệu thống kê:", err);
+        });
+    </script>
   </body>
   </html>
   

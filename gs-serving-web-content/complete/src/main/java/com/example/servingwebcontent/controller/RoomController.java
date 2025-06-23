@@ -60,8 +60,11 @@ public class RoomController {
     public String showRoomsDueSoon(Model model) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime in7Days = now.plusDays(7);
-        List<Room> dueRooms = roomRepository.findByDueDateBetween(now, in7Days);
-        model.addAttribute("rooms", dueRooms);
+        List<Room> dueRooms = roomRepository.findByDueDateBetweenAndStatus(now, in7Days, Room.Status.occupied);
+
+        model.addAttribute("dueRooms", dueRooms);
         return "room_due_list";
     }
+    
+
 }
