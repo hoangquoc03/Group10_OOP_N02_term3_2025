@@ -34,7 +34,7 @@
 
 ## 📦 Mô hình đối tượng
 
-```java
+
 class Room {
     String roomID;
     double price;
@@ -58,12 +58,6 @@ Thêm, sửa, xoá tenant
 
 Liệt kê thông tin tenant: nameT, nameID, phoneTenant
 
-Lọc tenant theo:
-
-Tên (nameT)
-
-Số điện thoại (phoneTenant)
-
 Mã người thuê (nameID)
 
 🔸 Quản lý Phòng trọ (Room)
@@ -75,25 +69,3 @@ Mỗi phòng chỉ có 1 tenant tại một thời điểm
 
 🔸 Quản lý Chủ nhà (Landlord)
 Thêm, sửa, xoá thông tin chủ nhà
-
-
-💾 Lưu trữ dữ liệu
-Dữ liệu được lưu dưới dạng file nhị phân
-
-Dùng các class Room, Tenant, Landlord để đọc/ghi file
-
-Sử dụng các lớp RoomService, TenantService, LandlordService để thao tác dữ liệu
-
-Dữ liệu trong bộ nhớ được lưu dưới dạng:
-
-ArrayList<Room>
-
-LinkedList<Tenant>
-
-Map<String, Landlord>
-
-📈 Sơ đồ & Thuật toán
-🔹 Sequence Diagram
-<img src="img/group10noidung2.png" alt="Sequence Diagram 1" width="400"/> <img src="img/group10noidung3.png" alt="Sequence Diagram 2" width="400"/>
-🔹 Lưu đồ thuật toán: kiemTraNgayDongTien()
-<img src="img/bai7_room-Le-hong-quoc.png" alt="Flowchart Algorithm" width="600"/>
