@@ -20,15 +20,15 @@
 ## Lưu đồ thuật toán: kiemTraNgayDongTien()
  <img src="img/thuattoanbai5.png" alt="Sequence Diagram 2" width="400"/>
 
-## Lê Hồng Quốc : Giao diện list Room cho thuê  bài 7
-<img src="img/bai7_room-Le-hong-quoc.png" alt="Flowchart Algorithm" width="600"/>
+## Lê Hồng Quốc : 
+<img src="img/demo1.png" alt="Flowchart Algorithm" width="600"/>
 
-## Đặng Thanh Tùng : Giao diện Tenant bài 7
+## Đặng Thanh Tùng :
 
-<img src="img/ôn.png" alt="Tenant UI Screenshot" width="600"/>
+<img src="img/demo2.png" alt="Tenant UI Screenshot" width="600"/>
 
-## Giao diện Chủ phòng bài 7 Lê Quang Thắng
-<img src="img/Screenshot 2025-06-19 112440.png" alt="Giao diện landlord" width="600"/>
+##  Lê Quang Thắng :
+<img src="img/demo3.png" alt="Giao diện landlord" width="600"/>
 
 ## 📦 Mô hình đối tượng
 
