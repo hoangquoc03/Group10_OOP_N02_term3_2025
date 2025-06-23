@@ -15,27 +15,37 @@
 Ứng dụng **Quản lý phòng trọ** giúp quản lý thông tin về người thuê, phòng trọ và chủ nhà, xây dựng bằng **Java Spring Boot**, sử dụng **file nhị phân** để lưu dữ liệu và các collection trong Java như `ArrayList`, `LinkedList`, `Map`.
 
 ---
-## Sequence Diagram
-<img src="img/group10noidung2.png" alt="Sequence Diagram 1" width="400"/> <img src="img/group10noidung3.png" alt="Sequence Diagram 2" width="400"/>
-## Lưu đồ thuật toán: kiemTraNgayDongTien()
- <img src="img/thuattoanbai5.png" alt="Sequence Diagram 2" width="400"/>
+## Sequence Diagram :
 
-## Lê Hồng Quốc : Giao diện list Room cho thuê  bài 7
-<img src="img/bai7_room-Le-hong-quoc.png" alt="Flowchart Algorithm" width="600"/>
+<img src="img/sequenceDiagram.png" alt="Sequence Diagram 1" width="600"/> 
+## Class Diagram :
 
-## Đặng Thanh Tùng : Giao diện Tenant bài 7
+<img src="img/classDiagram.png" alt="Sequence Diagram 2" width="600"/>
+## Lưu đồ thuật toán: Thống kê người dùng/phòng đang thuê
 
-<img src="img/ôn.png" alt="Tenant UI Screenshot" width="600"/>
+ <img src="img/thuattoann.png" alt="Sequence Diagram 2" width="600"/>
 
-## Giao diện Chủ phòng bài 7 Lê Quang Thắng
-<img src="img/Screenshot 2025-06-19 112440.png" alt="Giao diện landlord" width="600"/>
+## Lê Hồng Quốc : 
+<img src="img/demo1.png" alt="Flowchart Algorithm" width="600"/>
+
+## Đặng Thanh Tùng :
+
+<img src="img/demo2.png" alt="Tenant UI Screenshot" width="600"/>
+
+##  Lê Quang Thắng :
+<img src="img/demo3.png" alt="Giao diện landlord" width="600"/>
 
 ## 📦 Mô hình đối tượng
-
-```java
 class Room {
     String roomID;
     double price;
+    status ENUM('available', 'occupied', 'maintenance'),
+    landlord_id INT,
+    tenant_id INT,
+    rented_from DATE,
+    due_date DATE,
+    created_at DATETIME,
+    updated_at DATETIME,
 }
 
 class Tenant {
@@ -50,48 +60,33 @@ class Landlord {
     String nameL;
     String phoneLandlord;
 }
-Chức năng chính
-🔸 Quản lý Người thuê (Tenant)
-Thêm, sửa, xoá tenant
+## 📋 Chức năng chính
 
-Liệt kê thông tin tenant: nameT, nameID, phoneTenant
+| Đối tượng   | Chức năng                                         |
+|-------------|--------------------------------------------------|
+| Tenant      | Thêm/Sửa/Xoá, Xem danh sách, Gán phòng           |
+| Room        | Thêm/Sửa/Xoá, Xem trạng thái, Gán tenant         |
+| Landlord    | Thêm/Sửa/Xoá, Quản lý danh sách phòng sở hữu     |
+| Contract    |  Quản lý hợp đồng thuê phòng                     |
+| Thống kê    | Thống kê số lượng người dùng, phòng đang thuê    |
 
-Lọc tenant theo:
+## 🧪 Kiểm thử & Xử lý lỗi
 
-Tên (nameT)
+- Sử dụng `try-catch` để bắt lỗi khi thao tác với cơ sở dữ liệu hoặc dữ liệu không hợp lệ.
+- API REST sử dụng `ResponseEntity` để trả về mã lỗi HTTP phù hợp.
+- Ví dụ:
+try {
+    // logic
+} catch (Exception e) {
+    return ResponseEntity.status(500).body("Lỗi: " + e.getMessage());
+}
 
-Số điện thoại (phoneTenant)
+## ☁️ Kết nối Cơ sở dữ liệu:
 
-Mã người thuê (nameID)
+- Cơ sở dữ liệu sử dụng: **MySQL trên nền tảng Aiven**
+- Cấu hình trong `application.properties`:
+spring.datasource.url=jdbc:mysql://mysql-1535c414-project-18.b.aivencloud.com:15714/db-onl?sslMode=REQUIRED&serverTimezone=Asia/Ho_Chi_Minh
+spring.datasource.username=avnadmin
+spring.datasource.password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
-🔸 Quản lý Phòng trọ (Room)
-Thêm, sửa, xoá phòng
-
-Gán Tenant cho Room
-
-Mỗi phòng chỉ có 1 tenant tại một thời điểm
-
-🔸 Quản lý Chủ nhà (Landlord)
-Thêm, sửa, xoá thông tin chủ nhà
-
-
-💾 Lưu trữ dữ liệu
-Dữ liệu được lưu dưới dạng file nhị phân
-
-Dùng các class Room, Tenant, Landlord để đọc/ghi file
-
-Sử dụng các lớp RoomService, TenantService, LandlordService để thao tác dữ liệu
-
-Dữ liệu trong bộ nhớ được lưu dưới dạng:
-
-ArrayList<Room>
-
-LinkedList<Tenant>
-
-Map<String, Landlord>
-
-📈 Sơ đồ & Thuật toán
-🔹 Sequence Diagram
-<img src="img/group10noidung2.png" alt="Sequence Diagram 1" width="400"/> <img src="img/group10noidung3.png" alt="Sequence Diagram 2" width="400"/>
-🔹 Lưu đồ thuật toán: kiemTraNgayDongTien()
-<img src="img/bai7_room-Le-hong-quoc.png" alt="Flowchart Algorithm" width="600"/>
