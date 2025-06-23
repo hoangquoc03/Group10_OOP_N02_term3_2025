@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AdminController {
 
     @GetMapping("/admin")
-    public String adminDashboard(Model model) {
-        model.addAttribute("title", "Trang quản trị Admin");
-        return "admin_dashboard"; // trỏ đến admin_dashboard.html trong templates
+    public String redirectToStaticAdminPage() {
+        return "redirect:/admin/admin_dashboard.html"; // Chuyển hướng đến file trong static
     }
 }
