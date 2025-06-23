@@ -16,7 +16,9 @@
 
 ---
 ## Sequence Diagram
-<img src="img/group10noidung2.png" alt="Sequence Diagram 1" width="400"/> <img src="img/group10noidung3.png" alt="Sequence Diagram 2" width="400"/>
+<img src="img/sequenceDiagram.png" alt="Sequence Diagram 1" width="400"/> 
+## Class Diagram
+<img src="img/classDiagram.png" alt="Sequence Diagram 2" width="400"/>
 ## Lưu đồ thuật toán: Thống kê người dùng/phòng đang thuê
  <img src="img/thuattoann.png" alt="Sequence Diagram 2" width="400"/>
 
