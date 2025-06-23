@@ -2,55 +2,66 @@ package com.example.servingwebcontent.controller;
 
 import com.example.servingwebcontent.model.Room;
 import com.example.servingwebcontent.repository.RoomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
+@RequestMapping("/rooms")
 public class RoomController {
 
-    @Autowired
-    private RoomRepository roomRepository;
+    private final RoomRepository roomRepository;
 
-    // ✅ Phòng sắp đến hạn thanh toán (7 ngày tới)
-    @GetMapping("/rooms/due")
-    public String getRoomsNearDueDate(Model model) {
-        // Tạo khoảng thời gian từ đầu hôm nay đến 23:59:59 sau 7 ngày
-        LocalDateTime start = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
-        LocalDateTime end = start.plusDays(7).withHour(23).withMinute(59).withSecond(59).withNano(0);
+    public RoomController(RoomRepository roomRepository) {
+        this.roomRepository = roomRepository;
+    }
 
-        System.out.println(">>> [DEBUG] Searching rooms due between " + start + " and " + end);
-
-        List<Room> rooms = roomRepository.findByDueDateBetween(start, end);
-
-        System.out.println(">>> [DEBUG] Rooms found: " + rooms.size());
-        for (Room room : rooms) {
-            System.out.println("Room: " + room.getRoomNumber() + " | Due Date: " + room.getDueDate());
-        }
-
-        model.addAttribute("rooms", rooms);
-        model.addAttribute("count", rooms.size());
-        model.addAttribute("title", "Phòng sắp đến hạn thanh toán"); // ✅ tiêu đề động
+    // Hiển thị danh sách tất cả phòng
+    @GetMapping("/all")
+    public String listRooms(Model model) {
+        model.addAttribute("rooms", roomRepository.findAll());
         return "room_list";
     }
 
-    // ✅ Tất cả phòng
-    @GetMapping("/rooms/all")
-    public String getAllRooms(Model model) {
-        List<Room> rooms = roomRepository.findAll();
+    // Hiển thị form thêm mới phòng
+    @GetMapping("/new")
+    public String showAddForm(Model model) {
+        model.addAttribute("room", new Room());
+        return "room_form";
+    }
 
-        System.out.println(">>> [DEBUG] Total rooms: " + rooms.size());
-        for (Room room : rooms) {
-            System.out.println("Room: " + room.getRoomNumber() + " | Due Date: " + room.getDueDate());
-        }
+    // Lưu thông tin phòng (thêm/sửa)
+    @PostMapping("/save")
+    public String saveRoom(@ModelAttribute Room room) {
+        roomRepository.save(room);
+        return "redirect:/rooms/all";
+    }
 
-        model.addAttribute("rooms", rooms);
-        model.addAttribute("count", rooms.size());
-        model.addAttribute("title", "Tất cả phòng hiện có"); // ✅ tiêu đề động
-        return "room_list";
+    // Hiển thị form sửa phòng theo ID
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable("id") Integer id, Model model) {
+        Room room = roomRepository.findById(id).orElse(new Room());
+        model.addAttribute("room", room);
+        return "room_form";
+    }
+
+    // Xoá phòng theo ID
+    @GetMapping("/delete/{id}")
+    public String deleteRoom(@PathVariable("id") Integer id) {
+        roomRepository.deleteById(id);
+        return "redirect:/rooms/all";
+    }
+
+    // Hiển thị danh sách phòng sắp đến hạn (due_date trong 7 ngày tới)
+    @GetMapping("/due")
+    public String showRoomsDueSoon(Model model) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime in7Days = now.plusDays(7);
+        List<Room> dueRooms = roomRepository.findByDueDateBetween(now, in7Days);
+        model.addAttribute("rooms", dueRooms);
+        return "room_due_list";
     }
 }
