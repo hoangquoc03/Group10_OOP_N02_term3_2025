@@ -14,6 +14,7 @@
 /workspaces/Group10_OOP_N02_term3_2025/gs-serving-web-content/complete/src/main/java/com/example/servingwebcontent/repository/UserRepository.java
 /workspaces/Group10_OOP_N02_term3_2025/gs-serving-web-content/complete/src/main/java/com/example/servingwebcontent/model/Landlord.java
 /workspaces/Group10_OOP_N02_term3_2025/gs-serving-web-content/complete/src/main/java/com/example/servingwebcontent/service/TenantService.java
+/workspaces/Group10_OOP_N02_term3_2025/gs-serving-web-content/complete/src/main/java/com/example/servingwebcontent/controller/AdminStatsController.java
 /workspaces/Group10_OOP_N02_term3_2025/gs-serving-web-content/complete/src/main/java/com/example/servingwebcontent/service/LandlordService.java
 /workspaces/Group10_OOP_N02_term3_2025/gs-serving-web-content/complete/src/main/java/com/example/servingwebcontent/model/Room.java
 /workspaces/Group10_OOP_N02_term3_2025/gs-serving-web-content/complete/src/main/java/com/example/servingwebcontent/controller/HomeController.java
