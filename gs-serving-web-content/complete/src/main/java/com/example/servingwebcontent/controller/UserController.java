@@ -17,17 +17,18 @@ public class UserController {
     @GetMapping
     public String listUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        return "user_list";
+        return "user_list"; // -> phải có file templates/user_list.html
     }
 
     @GetMapping("/new")
     public String showForm(Model model) {
         model.addAttribute("user", new User());
-        return "user_form";
+        return "user_form"; // -> phải có file templates/user_form.html
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute("user") User user) {
+        System.out.println("Saving user: " + user.getFullname()); // kiểm tra xem có chạy không
         userService.saveUser(user);
         return "redirect:/users";
     }
