@@ -22,7 +22,7 @@ public class TenantController {
         return "tenant_list";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/new")
     public String showAddForm(Model model) {
         model.addAttribute("tenant", new Tenant());
         return "tenant_form";
@@ -33,10 +33,15 @@ public class TenantController {
         tenantRepository.save(tenant);
         return "redirect:/tenants";
     }
+    @GetMapping("/add")
+    public String redirectToAdd() {
+        return "redirect:/tenants/new";
+    }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Integer id, Model model) {
-        model.addAttribute("tenant", tenantRepository.findById(id).orElse(null));
+        model.addAttribute("tenant",
+            tenantRepository.findById(id).orElse(new Tenant()));
         return "tenant_form";
     }
 
