@@ -20,10 +20,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private Integer landlord_id;
-    private Integer tenant_id;
+    @Column(name = "landlord_id")
+    private Integer landlordId;
 
-    private LocalDateTime created_at;
+    @Column(name = "tenant_id")
+    private Integer tenantId;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now(); // ✅ khởi tạo mặc định
 
     public enum Role {
         admin, landlord, tenant
@@ -51,12 +55,12 @@ public class User {
     public Role getRole() { return role; }
     public void setRole(Role role) { this.role = role; }
 
-    public Integer getLandlord_id() { return landlord_id; }
-    public void setLandlord_id(Integer landlord_id) { this.landlord_id = landlord_id; }
+    public Integer getLandlordId() { return landlordId; }
+    public void setLandlordId(Integer landlordId) { this.landlordId = landlordId; }
 
-    public Integer getTenant_id() { return tenant_id; }
-    public void setTenant_id(Integer tenant_id) { this.tenant_id = tenant_id; }
+    public Integer getTenantId() { return tenantId; }
+    public void setTenantId(Integer tenantId) { this.tenantId = tenantId; }
 
-    public LocalDateTime getCreated_at() { return created_at; }
-    public void setCreated_at(LocalDateTime created_at) { this.created_at = created_at; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

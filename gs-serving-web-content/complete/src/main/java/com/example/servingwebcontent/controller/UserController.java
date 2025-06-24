@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+
 
 @Controller
 @RequestMapping("/users")
@@ -73,5 +76,56 @@ public class UserController {
             model.addAttribute("errorMessage", "Lỗi khi xóa người dùng: " + e.getMessage());
             return "error";
         }
+    }
+    // === Trang đăng ký ===
+    @GetMapping("/register")
+    public String showRegisterForm(Model model) {
+        model.addAttribute("user", new User());
+        return "login_sign"; // file HTML chứa form đăng ký
+    }
+
+    @PostMapping("/register")
+    public String register(@ModelAttribute("user") User user, Model model) {
+        if (userService.getUserByUsername(user.getUsername()) != null) {
+            model.addAttribute("errorMessage", "Tên đăng nhập đã tồn tại.");
+            return "login_sign";
+        }
+
+        user.setCreated_at(LocalDateTime.now());
+        userService.saveUser(user);
+        return "redirect:/login";
+    }
+
+    // === Trang đăng nhập ===
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "logn_in"; // file HTML chứa form đăng nhập
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam String username,
+                        @RequestParam String password,
+                        Model model,
+                        HttpSession session) {
+        User user = userService.getUserByUsername(username);
+
+        if (user == null || !user.getPassword().equals(password)) {
+            model.addAttribute("errorMessage", "Sai tên đăng nhập hoặc mật khẩu.");
+            return "logn_in";
+        }
+
+        session.setAttribute("loggedInUser", user);
+
+        if (user.getRole() == User.Role.admin) {
+            return "redirect:/admin";
+        } else {
+            return "redirect:/home"; // người dùng thường → có thể thay đổi
+        }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
     }
 }
