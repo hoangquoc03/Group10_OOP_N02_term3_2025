@@ -14,6 +14,7 @@ com/example/servingwebcontent/controller/LandlordController.class
 com/example/servingwebcontent/model/Room$Status.class
 com/example/servingwebcontent/model/Landlord.class
 com/example/servingwebcontent/controller/UserController.class
+com/example/servingwebcontent/service/TenantService.class
 com/example/servingwebcontent/repository/UserRepository.class
 com/example/servingwebcontent/model/User.class
 com/example/servingwebcontent/repository/TenantRepository.class

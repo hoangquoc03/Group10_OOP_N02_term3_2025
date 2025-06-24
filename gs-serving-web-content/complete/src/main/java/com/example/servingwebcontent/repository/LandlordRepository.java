@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LandlordRepository extends JpaRepository<Landlord, Integer> {
+    long count(); // Đếm tất cả chủ trọ
 }

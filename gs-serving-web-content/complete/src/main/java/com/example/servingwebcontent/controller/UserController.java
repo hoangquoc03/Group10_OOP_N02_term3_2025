@@ -91,7 +91,7 @@ public class UserController {
             return "login_sign";
         }
 
-        user.setCreated_at(LocalDateTime.now());
+        user.setCreatedAt(LocalDateTime.now());
         userService.saveUser(user);
         return "redirect:/login";
     }

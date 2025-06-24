@@ -31,4 +31,7 @@ public class LandlordService {
     public void deleteLandlord(Integer id) {
         landlordRepository.deleteById(id);
     }
+    public long getLandlordCount() {
+        return landlordRepository.count();
+    }
 }
