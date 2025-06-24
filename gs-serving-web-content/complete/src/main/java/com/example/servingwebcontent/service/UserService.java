@@ -31,5 +31,8 @@ public class UserService {
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+    public long countByRole(User.Role role) {
+        return userRepository.countByRole(role);
+    }
     
 }

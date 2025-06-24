@@ -5,6 +5,7 @@ com/example/servingwebcontent/model/Tenant.class
 com/example/servingwebcontent/controller/RoomController.class
 com/example/servingwebcontent/model/User$Role.class
 com/example/servingwebcontent/service/UserService.class
+com/example/servingwebcontent/controller/AuthController.class
 com/example/servingwebcontent/controller/TenantController.class
 com/example/servingwebcontent/model/Room.class
 com/example/servingwebcontent/repository/LandlordRepository.class
