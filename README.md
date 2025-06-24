@@ -20,7 +20,7 @@
 <img src="img/sequenceDiagram.png" alt="Sequence Diagram 1" width="600"/> 
 ## Class Diagram :
 
-<img src="img/classDiagram.png" alt="Sequence Diagram 2" width="600"/>
+<img src="img/classDiagram1.png" alt="Sequence Diagram 2" width="600"/>
 ## Lưu đồ thuật toán: Thống kê người dùng/phòng đang thuê
 
  <img src="img/thuattoann.png" alt="Sequence Diagram 2" width="600"/>
