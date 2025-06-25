@@ -111,6 +111,6 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 | Thiết kế giao diện                    | 50%              | 30%             | 20%             |
 | Viết báo cáo                          | 10%              | 80%             | 10%             |
 | Làm PowerPoint                        | 10%              | 80%             |10%              |
-| **Tỷ lệ đóng góp (%)**                | **60%**          | **23%**         | **1717%**         |
+| **Tỷ lệ đóng góp (%)**                | **60%**          | **23%**         | **17%**         |
 
 
