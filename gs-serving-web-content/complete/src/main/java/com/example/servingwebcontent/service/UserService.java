@@ -34,5 +34,4 @@ public class UserService {
     public long countByRole(User.Role role) {
         return userRepository.countByRole(role);
     }
-    
 }

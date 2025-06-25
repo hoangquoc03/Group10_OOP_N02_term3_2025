@@ -1,5 +1,6 @@
 package com.example.servingwebcontent.controller;
 
+import com.example.servingwebcontent.service.RoomService;
 import com.example.servingwebcontent.model.User;
 import com.example.servingwebcontent.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    private RoomService roomService; 
 
     @GetMapping
     public String listUsers(Model model) {
@@ -76,5 +79,31 @@ public class UserController {
             model.addAttribute("errorMessage", "Lỗi khi xóa người dùng: " + e.getMessage());
             return "error";
         }
+    }
+    // Hiển thị thông tin người dùng
+    @GetMapping("/edit-profile")
+    public String showEditForm(HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("loggedInUser");
+        if (currentUser == null) return "redirect:/login";
+
+        User user = userService.getUserById(currentUser.getId());
+        model.addAttribute("user", user);
+        return "User/edit_profile";
+    }
+
+    // Cập nhật thông tin
+    @PostMapping("/update-profile")
+    public String updateProfile(@ModelAttribute("user") User updatedUser, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("loggedInUser");
+        updatedUser.setId(sessionUser.getId()); 
+
+        userService.saveUser(updatedUser);
+        session.setAttribute("loggedInUser", updatedUser); 
+        return "redirect:/home";
+    }
+    @GetMapping("/available-rooms")
+    public String showRoomCards(Model model) {
+        model.addAttribute("vacantRooms", roomService.getVacantRooms()); 
+        return "User/room_cards"; 
     }
 }

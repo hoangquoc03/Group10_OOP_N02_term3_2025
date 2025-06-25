@@ -1,4 +1,5 @@
 com/example/servingwebcontent/controller/AdminController.class
+com/example/servingwebcontent/service/RoomService.class
 com/example/servingwebcontent/controller/AdminStatsController.class
 com/example/servingwebcontent/ServingWebContentApplication.class
 com/example/servingwebcontent/model/Tenant.class

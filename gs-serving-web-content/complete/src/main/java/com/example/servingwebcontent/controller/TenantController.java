@@ -5,12 +5,20 @@ import com.example.servingwebcontent.repository.TenantRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import com.example.servingwebcontent.model.Room;
+import com.example.servingwebcontent.service.RoomService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/tenants")
 public class TenantController {
 
     private final TenantRepository tenantRepository;
+    @Autowired
+    private RoomService roomService; 
 
     public TenantController(TenantRepository tenantRepository) {
         this.tenantRepository = tenantRepository;
@@ -81,4 +89,11 @@ public class TenantController {
         }
         return "redirect:/tenants";
     }
+    @GetMapping("/rooms")
+    public String showVacantRooms(Model model) {
+        List<Room> vacantRooms = roomService.getVacantRooms();
+        model.addAttribute("vacantRooms", vacantRooms);
+        return "User/room_cards";
+}
+
 }
