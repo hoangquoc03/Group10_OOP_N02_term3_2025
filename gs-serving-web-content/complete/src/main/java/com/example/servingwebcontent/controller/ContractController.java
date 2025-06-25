@@ -1,8 +1,6 @@
 package com.example.servingwebcontent.controller;
 
 import com.example.servingwebcontent.model.Contract;
-import com.example.servingwebcontent.model.Room;
-import com.example.servingwebcontent.model.Tenant;
 import com.example.servingwebcontent.service.ContractService;
 import com.example.servingwebcontent.service.RoomService;
 import com.example.servingwebcontent.service.TenantService;
@@ -49,7 +47,8 @@ public class ContractController {
 
     @GetMapping("/edit/{id}")
     public String editContract(@PathVariable Long id, Model model) {
-        Contract contract = contractService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid contract ID"));
+        Contract contract = contractService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid contract ID: " + id));
         model.addAttribute("contract", contract);
         model.addAttribute("rooms", roomService.findAll());
         model.addAttribute("tenants", tenantService.findAll());
@@ -59,6 +58,12 @@ public class ContractController {
     @GetMapping("/delete/{id}")
     public String deleteContract(@PathVariable Long id) {
         contractService.deleteById(id);
+        return "redirect:/contracts";
+    }
+    @PostMapping("/update/{id}")
+    public String updateContract(@PathVariable Long id, @ModelAttribute("contract") Contract contract) {
+        contract.setId(id); // gán lại ID cho chắc chắn
+        contractService.save(contract); // dùng cùng 1 save() để lưu lại
         return "redirect:/contracts";
     }
 }
