@@ -4,11 +4,15 @@ com/example/servingwebcontent/controller/AdminStatsController.class
 com/example/servingwebcontent/ServingWebContentApplication.class
 com/example/servingwebcontent/model/Tenant.class
 com/example/servingwebcontent/controller/RoomController.class
+com/example/servingwebcontent/service/ContractService.class
 com/example/servingwebcontent/model/User$Role.class
+com/example/servingwebcontent/repository/ContractRepository.class
 com/example/servingwebcontent/service/UserService.class
 com/example/servingwebcontent/controller/AuthController.class
 com/example/servingwebcontent/controller/TenantController.class
 com/example/servingwebcontent/model/Room.class
+com/example/servingwebcontent/model/Contract.class
+com/example/servingwebcontent/model/Contract$ContractStatus.class
 com/example/servingwebcontent/repository/LandlordRepository.class
 com/example/servingwebcontent/controller/HomeController.class
 com/example/servingwebcontent/repository/RoomRepository.class
@@ -18,6 +22,7 @@ com/example/servingwebcontent/model/Landlord.class
 com/example/servingwebcontent/controller/UserController.class
 com/example/servingwebcontent/service/TenantService.class
 com/example/servingwebcontent/repository/UserRepository.class
+com/example/servingwebcontent/controller/ContractController.class
 com/example/servingwebcontent/model/User.class
 com/example/servingwebcontent/repository/TenantRepository.class
 com/example/servingwebcontent/service/LandlordService.class

@@ -34,4 +34,7 @@ public class LandlordService {
     public long getLandlordCount() {
         return landlordRepository.count();
     }
+    public List<Landlord> findAll() {
+        return landlordRepository.findAll();
+    }
 }
