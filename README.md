@@ -100,8 +100,8 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 | Công việc                             | Lê Hồng Quốc     | Đặng Thanh Tùng | Lê Quang Thắng  |
 |---------------------------------------|------------------|-----------------|-----------------|
 | Phát triển quản lý người dùng         | 100%             |                 |                 |
-| Phát triển quản lý chủ trọ            | 100%             |                 |                 |
-| Phát triển quản lý người thuê         | 100%             |                 |                 |
+| Phát triển quản lý chủ trọ            | 80%              |                 |20%              |
+| Phát triển quản lý người thuê         | 80%              |20%              |                 |
 | Phát triển quản lý phòng              | 100%             |                 |                 |
 | Phát triển quản lý phòng sắp đến hạn  | 100%             |                 |                 |
 | Phát triển quản lý hợp đồng           | 30%              |40%              |30%              |
