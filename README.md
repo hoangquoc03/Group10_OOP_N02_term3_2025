@@ -106,11 +106,11 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 | Phát triển quản lý phòng sắp đến hạn  | 100%             |                 |                 |
 | Phát triển quản lý hợp đồng           | 30%              |40%              |30%              |
 | Phát triển giao diện người dùng       | 40%              |30%              |30%              |
-| Thiết kế database                     | 40%              | 30%             | 30%             |
+| Thiết kế database                     | 50%              | 25%             | 25%             |
 | Cài đặt database                      | 80%              | 10%             | 10%             |
 | Thiết kế giao diện                    | 50%              | 30%             | 20%             |
 | Viết báo cáo                          | 10%              | 80%             | 10%             |
 | Làm PowerPoint                        | 10%              | 80%             |10%              |
-| **Tỷ lệ đóng góp (%)**                | **60%**          | **23%**         | **17%**         |
+| **Tỷ lệ đóng góp (%)**                | **60%**          | **23%**         | **1717%**         |
 
 
