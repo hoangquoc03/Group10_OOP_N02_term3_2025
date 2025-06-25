@@ -36,6 +36,12 @@ public class Room {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
     public enum Status {
         available, occupied, maintenance
     }
@@ -116,4 +122,20 @@ public class Room {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 }
