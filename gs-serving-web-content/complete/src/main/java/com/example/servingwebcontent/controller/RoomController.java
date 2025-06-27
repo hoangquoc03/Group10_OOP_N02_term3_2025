@@ -98,4 +98,10 @@ public class RoomController {
             return "error";
         }
     }
+    @GetMapping("/rooms/view/{id}")
+    public String viewRoomDetails(@PathVariable Integer id, Model model) {
+        Room room = roomService.getRoomById(id); 
+        model.addAttribute("room", room);
+        return "room_detail"; // Tên file HTML chi tiết phòng
+}
 }
