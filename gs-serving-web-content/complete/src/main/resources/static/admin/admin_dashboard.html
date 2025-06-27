@@ -1,4 +1,4 @@
-<!-- admin_dashboard.html -->
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -77,18 +77,21 @@
     .logout-link:hover { text-decoration: underline; }
     .notification-icon {
       position: relative;
-      margin: 0 15px;
-      color: #000;
+      display: inline-block;
+      cursor: pointer;
     }
     .notification-badge {
       position: absolute;
-      top: -5px;
-      right: -10px;
+      top: -6px;
+      right: -6px;
       background-color: red;
       color: white;
-      font-size: 10px;
+      font-size: 11px;
       padding: 2px 6px;
       border-radius: 50%;
+      font-weight: bold;
+      line-height: 1;
+      z-index: 10;
       animation: pulse 1.5s infinite;
     }
     @keyframes pulse {
@@ -96,27 +99,6 @@
       50% { transform: scale(1.2); }
       100% { transform: scale(1); }
     }
-    .notification-icon {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.notification-badge {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  background-color: red;
-  color: white;
-  font-size: 11px;
-  padding: 2px 6px;
-  border-radius: 50%;
-  font-weight: bold;
-  line-height: 1;
-  z-index: 10;
-  animation: pulse 1.5s infinite;
-}
-
   </style>
 </head>
 <body>
@@ -133,9 +115,10 @@
       <a href="/rooms/all"><i class="fas fa-bed"></i> Quản lý phòng</a>
       <a href="/rooms/due"><i class="fas fa-calendar-alt"></i> Phòng sắp đến hạn</a>
       <a href="/contracts"><i class="fas fa-file-contract"></i> Hợp đồng thuê</a>
-      <a href="/admin/feedbacks"><i class="fas fa-comment-dots"></i> Phản hồi</a>
-      <a href="/admin/invoices"><i class="fas fa-file-invoice"></i> Hóa đơn</a>
-      <a href="/admin/notifications"><i class="fas fa-bell"></i> Thông báo</a>
+      <a href="#" onclick="event.preventDefault(); loadData('feedbacks')"><i class="fas fa-comment-dots"></i> Phản hồi</a>
+      <a href="#" onclick="event.preventDefault(); loadData('invoices')"><i class="fas fa-file-invoice"></i> Hóa đơn</a>
+      <a href="#" onclick="event.preventDefault(); loadData('notifications')"><i class="fas fa-bell"></i> Thông báo</a>
+
     </div>
 
     <!-- Main content -->
@@ -161,7 +144,7 @@
       <div class="p-4">
         <h3>👥 Người dùng & Quản lý</h3>
 
-        <!-- Hàng 1 -->
+        <!-- Thống kê -->
         <div class="row mt-4">
           <div class="col-md-3"><div class="card-box bg-primary text-center"><h5><i class="fas fa-user-shield"></i> Quản trị viên</h5><h4 id="admin-count">...đang tải</h4></div></div>
           <div class="col-md-3"><div class="card-box bg-success text-center"><h5><i class="fas fa-user-tie"></i> Chủ trọ</h5><h4 id="landlord-count">...đang tải</h4></div></div>
@@ -169,38 +152,37 @@
           <div class="col-md-3"><div class="card-box bg-warning text-center"><h5><i class="fas fa-bed"></i> Phòng đang thuê</h5><h4 id="occupied-room-count">...đang tải</h4></div></div>
         </div>
 
-        <!-- Hàng 2 (sửa lỗi layout tại đây) -->
+        <!-- Các thẻ bấm -->
         <div class="row">
           <div class="col-md-3">
-            <a href="/admin/feedbacks" class="text-decoration-none text-white">
-              <div class="card-box bg-danger text-center">
-                <h5><i class="fas fa-comment-dots"></i> Phản hồi</h5>
-                <h4 id="feedback-count">Đang tải...</h4>
-              </div>
-            </a>
+            <div onclick="loadData('feedbacks')" class="card-box bg-danger text-center">
+              <h5><i class="fas fa-comment-dots"></i> Phản hồi</h5>
+              <h4 id="feedback-count">Đang tải...</h4>
+            </div>
           </div>
           <div class="col-md-3">
-            <a href="/admin/invoices" class="text-decoration-none text-white">
-              <div class="card-box bg-secondary text-center">
-                <h5><i class="fas fa-file-invoice-dollar"></i> Hóa đơn</h5>
-                <h4 id="invoice-count">Đang tải...</h4>
-              </div>
-            </a>
+            <div onclick="loadData('invoices')" class="card-box bg-secondary text-center">
+              <h5><i class="fas fa-file-invoice-dollar"></i> Hóa đơn</h5>
+              <h4 id="invoice-count">Đang tải...</h4>
+            </div>
           </div>
           <div class="col-md-3">
-            <a href="/admin/notifications" class="text-decoration-none text-white">
-              <div class="card-box bg-dark text-center">
-                <h5><i class="fas fa-bell"></i> Thông báo</h5>
-                <h4 id="notification-count">Đang tải...</h4>
-              </div>
-            </a>
+            <div onclick="loadData('notifications')" class="card-box bg-dark text-center">
+              <h5><i class="fas fa-bell"></i> Thông báo</h5>
+              <h4 id="notification-count">Đang tải...</h4>
+            </div>
           </div>
         </div>
 
+        <!-- Biểu đồ -->
         <div class="chart-container mt-4">
           <h5>📊 Thống kê quản lý người dùng</h5>
           <canvas id="myPieChart" height="150"></canvas>
         </div>
+
+        <!-- Danh sách động -->
+        <div id="dynamic-section" class="mt-4"></div>
+
       </div>
     </div>
   </div>
@@ -236,15 +218,75 @@
         },
         options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
       });
+    });
+    function loadData(type) {
+  const section = document.getElementById('dynamic-section');
+  section.innerHTML = `<div class="text-muted">Đang tải ${type}...</div>`;
+
+  fetch(`/api/${type}`)
+    .then(res => {
+      if (!res.ok) throw new Error("API lỗi");
+      return res.json();
+    })
+    .then(data => {
+      console.log(`✅ Dữ liệu từ /api/${type}:`, data);
+
+      let titleMap = {
+        feedbacks: "📣 Danh sách phản hồi",
+        invoices: "💵 Danh sách hóa đơn",
+        notifications: "🔔 Danh sách thông báo"
+      };
+      let title = titleMap[type];
+
+      if (!Array.isArray(data) || data.length === 0) {
+        section.innerHTML = `<div class="text-muted">Không có ${title.toLowerCase()}</div>`;
+        return;
+      }
+
+      let html = `<h5 class="fw-bold mb-3">${title}</h5><div class="table-responsive"><table class="table table-bordered table-striped">`;
+
+      if (type === 'feedbacks') {
+        html += `<thead><tr><th>#</th><th>Tiêu đề</th><th>Nội dung</th><th>Ngày gửi</th></tr></thead><tbody>`;
+        data.forEach((fb, i) => {
+          html += `<tr>
+            <td>${i + 1}</td>
+            <td>${fb.title ?? '(Không có tiêu đề)'}</td>
+            <td>${fb.content}</td>
+            <td>${fb.createdAt ? new Date(fb.createdAt).toLocaleString() : ''}</td>
+          </tr>`;
+        });
+      } else if (type === 'invoices') {
+        html += `<thead><tr><th>#</th><th>Người thuê</th><th>Số tiền</th><th>Ngày lập</th></tr></thead><tbody>`;
+        data.forEach((inv, i) => {
+          html += `<tr>
+            <td>${i + 1}</td>
+            <td>${inv.tenantName ?? 'Không rõ'}</td>
+            <td>${inv.amount?.toLocaleString() ?? '0'} đ</td>
+            <td>${inv.createdAt ? new Date(inv.createdAt).toLocaleDateString() : ''}</td>
+          </tr>`;
+        });
+      } else if (type === 'notifications') {
+        html += `<thead><tr><th>#</th><th>Tiêu đề</th><th>Nội dung</th><th>Thời gian</th></tr></thead><tbody>`;
+        data.forEach((noti, i) => {
+          html += `<tr>
+            <td>${i + 1}</td>
+            <td>${noti.title ?? ''}</td>
+            <td>${noti.content ?? ''}</td>
+            <td>${noti.createdAt ? new Date(noti.createdAt).toLocaleString() : ''}</td>
+          </tr>`;
+        });
+      }
+
+      html += `</tbody></table></div>`;
+      section.innerHTML = html;
     })
     .catch(err => {
-      console.error("Lỗi:", err);
-      ["admin","landlord","tenant","occupied-room","feedback","invoice","notification"].forEach(id =>
-        document.getElementById(id + "-count").innerText = "Lỗi"
-      );
-      document.getElementById('notification-badge').style.display = "none";
+      console.error("❌ Lỗi khi tải dữ liệu:", err);
+      section.innerHTML = `<div class="text-danger">Không thể tải ${type}</div>`;
     });
+   }
 
+  
   fetch('/api/notifications')
     .then(res => res.json())
     .then(notifications => {
@@ -254,26 +296,10 @@
         list.innerHTML += `<li class="text-center text-muted">Không có thông báo nào</li>`;
       } else {
         notifications.forEach(noti => {
-          list.innerHTML += `
-            <li>
-              <div class="dropdown-item">
-                <strong>${noti.title}</strong><br/>
-                <small>${noti.content}</small><br/>
-                <small class="text-muted">${new Date(noti.createdAt).toLocaleString()}</small>
-              </div>
-              <hr class="dropdown-divider">
-            </li>`;
+          list.innerHTML += `<li><div class="dropdown-item"><strong>${noti.title}</strong><br/><small>${noti.content}</small><br/><small class="text-muted">${new Date(noti.createdAt).toLocaleString()}</small></div><hr class="dropdown-divider"></li>`;
         });
       }
-    })
-    .catch(error => {
-      console.error("Lỗi khi tải thông báo:", error);
-      const list = document.getElementById('notification-list');
-      list.innerHTML = `<li class="text-danger text-center">Không thể tải thông báo</li>`;
     });
-    const badge = document.getElementById('notification-badge');
-    badge.innerText = data.notification ?? 0;
-    badge.style.display = (data.notification ?? 0) > 0 ? 'inline-block' : 'none';
 </script>
 </body>
 </html>

@@ -32,9 +32,7 @@ public class Feedback {
     private LocalDateTime createdAt;
 
     public enum Status {
-        new_,
-        in_progress,
-        resolved
+        NEW, IN_PROGRESS, RESOLVED;
     }
 
     // Getters & Setters

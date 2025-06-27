@@ -77,4 +77,23 @@ public class AdminStatsController {
     public String ping() {
         return "API hoạt động";
     }
+    @GetMapping("/feedbacks")
+    public ResponseEntity<?> getFeedbacks() {
+        try {
+            return ResponseEntity.ok(feedbackRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt")));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Lỗi khi lấy phản hồi: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/invoices")
+    public ResponseEntity<?> getInvoices() {
+        try {
+            return ResponseEntity.ok(invoiceRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt")));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Lỗi khi lấy hóa đơn: " + e.getMessage());
+        }
+    }
 }
