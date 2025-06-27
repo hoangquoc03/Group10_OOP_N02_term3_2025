@@ -1,14 +1,15 @@
-# Quản lý nhà trọ - Group 10 OOP N02 TERM 3 2025
+# Quản lý nhà trọ - Group 10 - OOP N02 TERM 3 2025
 
 ## Nhóm thực hiện
 - Đặng Thanh Tùng  
 - Lê Hồng Quốc  
 - Lê Quang Thắng  
 
-## Repository
-🔗 [GitHub Repository](https://github.com/hoangquoc03/Group10_OOP_N02_term3_2025)
-
----
+## 🔗 Các liên kết quan trọng
+- 🔗 [GitHub Repository](https://github.com/your-org/your-repo)
+- 📺 [Video demo ứng dụng (YouTube)](https://youtube.com/your-demo)
+- 🌐 [Ứng dụng chạy toàn cầu (nếu có)](https://your-app-link.com)
+- 📄 [Bìa theo mẫu ĐH Phenikaa (PDF)](https://your-link.com/cover.pdf)
 
 ## 🏠 Giới thiệu Dự án
 
@@ -92,4 +93,24 @@ spring.datasource.url=jdbc:mysql://mysql-1535c414-project-18.b.aivencloud.com:15
 spring.datasource.username=avnadmin
 spring.datasource.password
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+
+## 👨‍🔧 Phân chia công việc nhóm
+
+| Công việc                             | Lê Hồng Quốc     | Đặng Thanh Tùng | Lê Quang Thắng  |
+|---------------------------------------|------------------|-----------------|-----------------|
+| Phát triển quản lý người dùng         | 100%             |                 |                 |
+| Phát triển quản lý chủ trọ            | 80%              |                 |20%              |
+| Phát triển quản lý người thuê         | 80%              |20%              |                 |
+| Phát triển quản lý phòng              | 100%             |                 |                 |
+| Phát triển quản lý phòng sắp đến hạn  | 100%             |                 |                 |
+| Phát triển quản lý hợp đồng           | 30%              |40%              |30%              |
+| Phát triển giao diện người dùng       | 40%              |30%              |30%              |
+| Thiết kế database                     | 50%              | 25%             | 25%             |
+| Cài đặt database                      | 80%              | 10%             | 10%             |
+| Thiết kế giao diện                    | 50%              | 30%             | 20%             |
+| Viết báo cáo                          | 10%              | 80%             | 10%             |
+| Làm PowerPoint                        | 10%              | 80%             |10%              |
+| **Tỷ lệ đóng góp (%)**                | **60%**          | **23%**         | **17%**         |
+
 
