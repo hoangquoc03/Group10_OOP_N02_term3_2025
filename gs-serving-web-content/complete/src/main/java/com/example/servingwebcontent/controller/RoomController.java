@@ -1,6 +1,9 @@
 package com.example.servingwebcontent.controller;
 
+import com.example.servingwebcontent.model.Device;
+import com.example.servingwebcontent.repository.DeviceRepository;
 import com.example.servingwebcontent.model.Room;
+import com.example.servingwebcontent.service.RoomService;
 import com.example.servingwebcontent.repository.RoomRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +18,11 @@ public class RoomController {
 
     private final RoomRepository roomRepository;
     private final RoomService roomService;
-    public RoomController(RoomRepository roomRepository, RoomService roomService) {
+    private final DeviceRepository deviceRepository;
+    public RoomController(RoomRepository roomRepository, RoomService roomService, DeviceRepository deviceRepository) {
         this.roomRepository = roomRepository;
         this.roomService = roomService;
+        this.deviceRepository = deviceRepository;
     }
 
     // Hiển thị danh sách tất cả phòng
@@ -106,7 +111,10 @@ public class RoomController {
             model.addAttribute("errorMessage", "Không tìm thấy phòng với ID: " + id);
             return "error";
         }
-    model.addAttribute("room", room);
-    return "room_detail";
-    }
+        List<Device> devices = deviceRepository.findByRoomId(id);
+        model.addAttribute("room", room);
+        model.addAttribute("devices", devices);
+        return "room_detail";
+   }
+    
 }
