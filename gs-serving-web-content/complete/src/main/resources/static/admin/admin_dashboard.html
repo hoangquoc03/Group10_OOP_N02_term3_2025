@@ -40,6 +40,7 @@
       margin-bottom: 10px;
     }
     .card-box {
+      min-height: 130px;
       padding: 20px;
       border-radius: 15px;
       color: white;
@@ -95,9 +96,29 @@
       50% { transform: scale(1.2); }
       100% { transform: scale(1); }
     }
+    .notification-icon {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: red;
+  color: white;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+  line-height: 1;
+  z-index: 10;
+  animation: pulse 1.5s infinite;
+}
+
   </style>
 </head>
-
 <body>
 <div class="container-fluid">
   <div class="row">
@@ -112,16 +133,26 @@
       <a href="/rooms/all"><i class="fas fa-bed"></i> Quản lý phòng</a>
       <a href="/rooms/due"><i class="fas fa-calendar-alt"></i> Phòng sắp đến hạn</a>
       <a href="/contracts"><i class="fas fa-file-contract"></i> Hợp đồng thuê</a>
+      <a href="/admin/feedbacks"><i class="fas fa-comment-dots"></i> Phản hồi</a>
+      <a href="/admin/invoices"><i class="fas fa-file-invoice"></i> Hóa đơn</a>
+      <a href="/admin/notifications"><i class="fas fa-bell"></i> Thông báo</a>
     </div>
 
     <!-- Main content -->
     <div class="col-md-10 p-0">
       <!-- Top bar -->
       <div class="topbar d-flex justify-content-end align-items-center">
-        <a href="/notifications" class="notification-icon">
-          <i class="fas fa-bell fa-lg" style="color:#929090;"></i>
-          <span id="notification-badge" class="notification-badge">0</span>
-        </a>
+        <div class="dropdown me-3">
+          <div class="notification-icon dropdown-toggle" id="dropdownNotifications" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+            <i class="fas fa-bell fa-lg" style="color:#929090;"></i>
+            <span id="notification-badge" class="notification-badge">0</span>
+          </div>
+          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownNotifications" style="width: 350px; max-height: 400px; overflow-y: auto;" id="notification-list">
+            <li class="dropdown-header fw-bold text-dark">🔔 Thông báo</li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="text-center text-muted">Đang tải...</li>
+          </ul>
+        </div>                
         <img src="/img/avatar.jpg" alt="Avatar" class="avatar" />
         <span>Admin</span>
         <a href="/logout" class="logout-link"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
@@ -129,16 +160,43 @@
 
       <div class="p-4">
         <h3>👥 Người dùng & Quản lý</h3>
+
+        <!-- Hàng 1 -->
         <div class="row mt-4">
-          <div class="col-md-3"><div class="card-box bg-primary"><h5><i class="fas fa-user-shield"></i> Quản trị viên</h5><h4 id="admin-count">Đang tải...</h4></div></div>
-          <div class="col-md-3"><div class="card-box bg-success"><h5><i class="fas fa-user-tie"></i> Chủ trọ</h5><h4 id="landlord-count">Đang tải...</h4></div></div>
-          <div class="col-md-3"><div class="card-box bg-info"><h5><i class="fas fa-user"></i> Người thuê</h5><h4 id="tenant-count">Đang tải...</h4></div></div>
-          <div class="col-md-3"><div class="card-box bg-warning"><h5><i class="fas fa-bed"></i> Phòng đang thuê</h5><h4 id="occupied-room-count">Đang tải...</h4></div></div>
-          <div class="col-md-3"><div class="card-box bg-danger"><h5><i class="fas fa-comment-dots"></i> Phản hồi</h5><h4 id="feedback-count">Đang tải...</h4></div></div>
-          <div class="col-md-3"><div class="card-box bg-secondary"><h5><i class="fas fa-file-invoice-dollar"></i> Hóa đơn</h5><h4 id="invoice-count">Đang tải...</h4></div></div>
+          <div class="col-md-3"><div class="card-box bg-primary text-center"><h5><i class="fas fa-user-shield"></i> Quản trị viên</h5><h4 id="admin-count">...đang tải</h4></div></div>
+          <div class="col-md-3"><div class="card-box bg-success text-center"><h5><i class="fas fa-user-tie"></i> Chủ trọ</h5><h4 id="landlord-count">...đang tải</h4></div></div>
+          <div class="col-md-3"><div class="card-box bg-info text-center"><h5><i class="fas fa-user"></i> Người thuê</h5><h4 id="tenant-count">...đang tải</h4></div></div>
+          <div class="col-md-3"><div class="card-box bg-warning text-center"><h5><i class="fas fa-bed"></i> Phòng đang thuê</h5><h4 id="occupied-room-count">...đang tải</h4></div></div>
         </div>
 
-        <!-- Chart Section -->
+        <!-- Hàng 2 (sửa lỗi layout tại đây) -->
+        <div class="row">
+          <div class="col-md-3">
+            <a href="/admin/feedbacks" class="text-decoration-none text-white">
+              <div class="card-box bg-danger text-center">
+                <h5><i class="fas fa-comment-dots"></i> Phản hồi</h5>
+                <h4 id="feedback-count">Đang tải...</h4>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-3">
+            <a href="/admin/invoices" class="text-decoration-none text-white">
+              <div class="card-box bg-secondary text-center">
+                <h5><i class="fas fa-file-invoice-dollar"></i> Hóa đơn</h5>
+                <h4 id="invoice-count">Đang tải...</h4>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-3">
+            <a href="/admin/notifications" class="text-decoration-none text-white">
+              <div class="card-box bg-dark text-center">
+                <h5><i class="fas fa-bell"></i> Thông báo</h5>
+                <h4 id="notification-count">Đang tải...</h4>
+              </div>
+            </a>
+          </div>
+        </div>
+
         <div class="chart-container mt-4">
           <h5>📊 Thống kê quản lý người dùng</h5>
           <canvas id="myPieChart" height="150"></canvas>
@@ -148,10 +206,11 @@
   </div>
 </div>
 
-<!-- Chart.js + Fetch dữ liệu -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
-  fetch('/api/admin/stats')
+  fetch('/api/stats')
     .then(res => res.ok ? res.json() : Promise.reject("Không thể lấy dữ liệu"))
     .then(data => {
       document.getElementById('admin-count').innerText = data.admin ?? 0;
@@ -160,6 +219,7 @@
       document.getElementById('occupied-room-count').innerText = data.occupiedRoom ?? 0;
       document.getElementById('feedback-count').innerText = data.feedback ?? 0;
       document.getElementById('invoice-count').innerText = data.invoice ?? 0;
+      document.getElementById('notification-count').innerText = data.notification ?? 0;
 
       const badge = document.getElementById('notification-badge');
       badge.innerText = data.notification ?? 0;
@@ -179,11 +239,41 @@
     })
     .catch(err => {
       console.error("Lỗi:", err);
-      ["admin","landlord","tenant","occupied-room","feedback","invoice"].forEach(id =>
+      ["admin","landlord","tenant","occupied-room","feedback","invoice","notification"].forEach(id =>
         document.getElementById(id + "-count").innerText = "Lỗi"
       );
       document.getElementById('notification-badge').style.display = "none";
     });
+
+  fetch('/api/notifications')
+    .then(res => res.json())
+    .then(notifications => {
+      const list = document.getElementById('notification-list');
+      list.innerHTML = `<li class="dropdown-header fw-bold text-dark">🔔 Thông báo</li><li><hr class="dropdown-divider"></li>`;
+      if (notifications.length === 0) {
+        list.innerHTML += `<li class="text-center text-muted">Không có thông báo nào</li>`;
+      } else {
+        notifications.forEach(noti => {
+          list.innerHTML += `
+            <li>
+              <div class="dropdown-item">
+                <strong>${noti.title}</strong><br/>
+                <small>${noti.content}</small><br/>
+                <small class="text-muted">${new Date(noti.createdAt).toLocaleString()}</small>
+              </div>
+              <hr class="dropdown-divider">
+            </li>`;
+        });
+      }
+    })
+    .catch(error => {
+      console.error("Lỗi khi tải thông báo:", error);
+      const list = document.getElementById('notification-list');
+      list.innerHTML = `<li class="text-danger text-center">Không thể tải thông báo</li>`;
+    });
+    const badge = document.getElementById('notification-badge');
+    badge.innerText = data.notification ?? 0;
+    badge.style.display = (data.notification ?? 0) > 0 ? 'inline-block' : 'none';
 </script>
 </body>
 </html>

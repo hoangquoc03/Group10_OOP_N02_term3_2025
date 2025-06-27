@@ -2,19 +2,22 @@ package com.example.servingwebcontent.controller;
 
 import com.example.servingwebcontent.model.Room;
 import com.example.servingwebcontent.model.User;
+import com.example.servingwebcontent.model.Notification;
 import com.example.servingwebcontent.repository.FeedbackRepository;
 import com.example.servingwebcontent.repository.InvoiceRepository;
 import com.example.servingwebcontent.repository.NotificationRepository;
 import com.example.servingwebcontent.repository.RoomRepository;
 import com.example.servingwebcontent.repository.UserRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api")
 public class AdminStatsController {
 
     private final UserRepository userRepository;
@@ -24,11 +27,11 @@ public class AdminStatsController {
     private final NotificationRepository notificationRepository;
 
     public AdminStatsController(
-        UserRepository userRepository,
-        RoomRepository roomRepository,
-        FeedbackRepository feedbackRepository,
-        InvoiceRepository invoiceRepository,
-        NotificationRepository notificationRepository
+            UserRepository userRepository,
+            RoomRepository roomRepository,
+            FeedbackRepository feedbackRepository,
+            InvoiceRepository invoiceRepository,
+            NotificationRepository notificationRepository
     ) {
         this.userRepository = userRepository;
         this.roomRepository = roomRepository;
@@ -53,6 +56,20 @@ public class AdminStatsController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Lỗi khi lấy thống kê: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/notifications")
+    public ResponseEntity<?> getNotifications() {
+        try {
+            // Trả về danh sách thông báo mới nhất (sắp xếp giảm dần theo createdAt)
+            List<Notification> notifications = notificationRepository.findAll(
+                    Sort.by(Sort.Direction.DESC, "createdAt")
+            );
+            return ResponseEntity.ok(notifications);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Lỗi khi lấy thông báo: " + e.getMessage());
         }
     }
 

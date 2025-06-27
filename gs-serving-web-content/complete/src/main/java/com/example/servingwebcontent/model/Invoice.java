@@ -5,50 +5,104 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "invoices")
 public class Invoice {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer invoiceId;
+    @Column(name = "invoice_id")
+    private Integer id;
 
+    @Column(name = "room_id")
     private Integer roomId;
+
+    @Column(name = "tenant_id")
     private Integer tenantId;
 
-    @Column(length = 7)
+    @Column(name = "month_year")
     private String monthYear;
 
+    @Column(name = "total_amount", precision = 10, scale = 2)
     private BigDecimal totalAmount;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Status status;
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @Column(name = "paid_at")
     private LocalDateTime paidAt;
 
     public enum Status {
-        unpaid, paid, overdue
+        unpaid,
+        paid,
+        overdue
     }
 
-    public Integer getInvoiceId() { return invoiceId; }
-    public void setInvoiceId(Integer invoiceId) { this.invoiceId = invoiceId; }
+    // Getters & Setters
+    public Integer getId() {
+        return id;
+    }
 
-    public Integer getRoomId() { return roomId; }
-    public void setRoomId(Integer roomId) { this.roomId = roomId; }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    public Integer getTenantId() { return tenantId; }
-    public void setTenantId(Integer tenantId) { this.tenantId = tenantId; }
+    public Integer getRoomId() {
+        return roomId;
+    }
 
-    public String getMonthYear() { return monthYear; }
-    public void setMonthYear(String monthYear) { this.monthYear = monthYear; }
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
+    }
 
-    public BigDecimal getTotalAmount() { return totalAmount; }
-    public void setTotalAmount(BigDecimal totalAmount) { this.totalAmount = totalAmount; }
+    public Integer getTenantId() {
+        return tenantId;
+    }
 
-    public Status getStatus() { return status; }
-    public void setStatus(Status status) { this.status = status; }
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public String getMonthYear() {
+        return monthYear;
+    }
 
-    public LocalDateTime getPaidAt() { return paidAt; }
-    public void setPaidAt(LocalDateTime paidAt) { this.paidAt = paidAt; }
+    public void setMonthYear(String monthYear) {
+        this.monthYear = monthYear;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getPaidAt() {
+        return paidAt;
+    }
+
+    public void setPaidAt(LocalDateTime paidAt) {
+        this.paidAt = paidAt;
+    }
 }
