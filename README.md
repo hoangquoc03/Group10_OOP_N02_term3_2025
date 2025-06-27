@@ -66,10 +66,10 @@ class Landlord {
 
 ## 📋 Chức năng chính
 
-| Đối tượng   | Chức năng                                         |
+| Đối tượng   | Chức năng                                        |
 |-------------|--------------------------------------------------|
 | Tenant      | Thêm/Sửa/Xoá, Xem danh sách, Gán phòng           |
-| Room        | Thêm/Sửa/Xoá, Xem trạng thái, Gán tenant         |
+| Room        | Thêm/Sửa/Xoá,Xem, Xem trạng thái, Gán tenant     |
 | Landlord    | Thêm/Sửa/Xoá, Quản lý danh sách phòng sở hữu     |
 | Contract    |  Quản lý hợp đồng thuê phòng                     |
 | Thống kê    | Thống kê số lượng người dùng, phòng đang thuê    |
@@ -100,8 +100,8 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 | Công việc                             | Lê Hồng Quốc     | Đặng Thanh Tùng | Lê Quang Thắng  |
 |---------------------------------------|------------------|-----------------|-----------------|
 | Phát triển quản lý người dùng         | 100%             |                 |                 |
-| Phát triển quản lý chủ trọ            | 80%              |                 |20%              |
-| Phát triển quản lý người thuê         | 80%              |20%              |                 |
+| Phát triển quản lý chủ trọ            | 0                |                 |100%             |
+| Phát triển quản lý người thuê         | 0                |100%             |                 |
 | Phát triển quản lý phòng              | 100%             |                 |                 |
 | Phát triển quản lý phòng sắp đến hạn  | 100%             |                 |                 |
 | Phát triển quản lý hợp đồng           | 30%              |40%              |30%              |
@@ -111,6 +111,6 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 | Thiết kế giao diện                    | 50%              | 30%             | 20%             |
 | Viết báo cáo                          | 10%              | 80%             | 10%             |
 | Làm PowerPoint                        | 10%              | 80%             |10%              |
-| **Tỷ lệ đóng góp (%)**                | **60%**          | **23%**         | **17%**         |
+| **Tỷ lệ đóng góp (%)**                | **50%**          | **25%**         | **25%**         |
 
 
