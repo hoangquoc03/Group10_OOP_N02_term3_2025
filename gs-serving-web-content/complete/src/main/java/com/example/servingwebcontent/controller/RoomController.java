@@ -14,9 +14,10 @@ import java.util.List;
 public class RoomController {
 
     private final RoomRepository roomRepository;
-
-    public RoomController(RoomRepository roomRepository) {
+    private final RoomService roomService;
+    public RoomController(RoomRepository roomRepository, RoomService roomService) {
         this.roomRepository = roomRepository;
+        this.roomService = roomService;
     }
 
     // Hiển thị danh sách tất cả phòng
@@ -98,10 +99,14 @@ public class RoomController {
             return "error";
         }
     }
-    @GetMapping("/rooms/view/{id}")
+    @GetMapping("/view/{id}")
     public String viewRoomDetails(@PathVariable Integer id, Model model) {
-        Room room = roomService.getRoomById(id); 
-        model.addAttribute("room", room);
-        return "room_detail"; // Tên file HTML chi tiết phòng
-}
+        Room room = roomService.getRoomById(id);
+        if (room == null) {
+            model.addAttribute("errorMessage", "Không tìm thấy phòng với ID: " + id);
+            return "error";
+        }
+    model.addAttribute("room", room);
+    return "room_detail";
+    }
 }
