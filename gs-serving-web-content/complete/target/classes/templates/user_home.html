@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trang người dùng</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <link rel="icon" href="./img/logo.png" type="image/x-icon" />
+  <link
+    rel="apple-touch-icon"
+    sizes="57x57"
+    href="./ico/apple-icon-57x57.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="60x60"
+    href="./ico/apple-icon-60x60.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="72x72"
+    href="./ico/apple-icon-72x72.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="76x76"
+    href="./ico/apple-icon-76x76.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="114x114"
+    href="./ico/apple-icon-114x114.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="120x120"
+    href="./ico/apple-icon-120x120.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="144x144"
+    href="./ico/apple-icon-144x144.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="152x152"
+    href="./ico/apple-icon-152x152.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="./ico/apple-icon-180x180.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="192x192"
+    href="./ico/android-icon-192x192.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="./ico/favicon-32x32.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="96x96"
+    href="./ico/favicon-96x96.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="./ico/favicon-16x16.png"
+  />
+  <link rel="manifest" href="./img/manifest.json" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+  <meta name="theme-color" content="#ffffff" />
+  <style>
+    body {
+      background: #eef1f7;
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: linear-gradient(to bottom, #4caf50, #3f51b5);
+      color: white;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 30px 15px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+
+    .sidebar img {
+      width: 70px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .sidebar h5 {
+      margin-bottom: 30px;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin: 10px 0;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      transform: translateX(5px);
+      text-decoration: underline;
+    }
+
+    .main-content {
+      margin-left: 220px;
+      width: calc(100% - 220px);
+    }
+
+    .header {
+      background: linear-gradient(to right, #4caf50, #3f51b5);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .logout-link {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .logout-link:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .slider {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .slider h5 {
+      margin-bottom: 15px;
+    }
+    .content {
+      padding: 40px;
+    }
+
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .slider {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    table {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    table th {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .room-section h5 {
+      margin-bottom: 15px;
+    }
+
+    .table-responsive {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <img src="/img/avatar.jpg" alt="Avatar">
+  <h5>Xin chào!</h5>
+  <a href="/home"><i class="fas fa-home"></i> Trang chủ</a>
+  <a href="/users/edit-profile"><i class="fas fa-user"></i> Cá nhân</a>
+  <a href="/tenants/rooms"><i class="fas fa-bed"></i> Phòng</a>
+  <a href="/payments/user"><i class="fas fa-calendar-alt"></i> Thanh toán</a>
+  <a href="/logout" class="text-danger"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+</div>
+
+<div class="main-content">
+
+  <div class="content container">
+    <div class="slider" data-aos="fade-right">
+      <h5>Tin tức mới</h5>
+      <marquee behavior="scroll" direction="left">Hệ thống vừa cập nhật giao diện mới! | Lịch bảo trì phòng tháng này đã được cập nhật</marquee>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card p-4">
+          <i class="fas fa-user fa-2x text-primary mb-2"></i>
+          <h5>Thông tin cá nhân</h5>
+          <p>Xem hoặc chỉnh sửa thông tin của bạn</p>
+          <a href="/users/edit-profile" class="btn btn-outline-primary btn-sm">Chi tiết</a>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card p-4">
+          <i class="fas fa-bed fa-2x text-success mb-2"></i>
+          <h5>Phòng đang thuê</h5>
+          <p>Xem thông tin phòng hiện tại</p>
+          <a href="/tenants/rooms" class="btn btn-outline-success btn-sm">Xem phòng</a>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card p-4">
+          <i class="fas fa-calendar-alt fa-2x text-warning mb-2"></i>
+          <h5>Lịch thanh toán</h5>
+          <p>Kiểm tra hạn thanh toán sắp tới</p>
+          <a href="/payments/user" class="btn btn-outline-warning btn-sm">Xem lịch</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="room-list" class="room-section mt-5" data-aos="fade-up">
+        <h5><i class="fas fa-door-open"></i> Danh sách phòng trống</h5>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Số phòng</th>
+                <th>Giá (VNĐ)</th>
+                <th>Trạng thái</th>
+                <th>Ngày thuê</th>
+                <th>Hạn thanh toán</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="room, stat : ${rooms}">
+                <td th:text="${stat.index + 1}">1</td>
+                <td th:text="${room.roomNumber}">P101</td>
+                <td th:text="${#numbers.formatDecimal(room.price, 0, 'COMMA', 0, 'POINT')} + 'đ'">1,000,000đ</td>
+                <td th:text="${room.status}">occupied</td>
+                <td th:text="${#temporals.format(room.rentedFrom, 'dd/MM/yyyy')}">01/06/2025</td>
+                <td th:text="${#temporals.format(room.dueDate, 'dd/MM/yyyy HH:mm')}">08/06/2025 14:00</td>
+              </tr>
+              <tr th:if="${rooms.size() == 0}">
+                <td colspan="6" class="text-center">Không có phòng nào đang thuê.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+</body>
+</html>

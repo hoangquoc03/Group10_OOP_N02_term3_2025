@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách phòng trống</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="../img/logo.png" type="image/x-icon" />
+  <link
+    rel="apple-touch-icon"
+    sizes="57x57"
+    href="../ico/apple-icon-57x57.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="60x60"
+    href="../ico/apple-icon-60x60.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="72x72"
+    href="../ico/apple-icon-72x72.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="76x76"
+    href="../ico/apple-icon-76x76.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="114x114"
+    href="../ico/apple-icon-114x114.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="120x120"
+    href="../ico/apple-icon-120x120.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="144x144"
+    href="../ico/apple-icon-144x144.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="152x152"
+    href="../ico/apple-icon-152x152.png"
+  />
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="../ico/apple-icon-180x180.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="192x192"
+    href="../ico/android-icon-192x192.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="../ico/favicon-32x32.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="96x96"
+    href="../ico/favicon-96x96.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="../ico/favicon-16x16.png"
+  />
+  <link rel="manifest" href="./img/manifest.json" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+  <meta name="theme-color" content="#ffffff" />
+  <style>
+    body {
+      background-color: #f8f9fa;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: linear-gradient(to right, #4caf50, #3f51b5);
+      color: white;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .sidebar img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .sidebar h5 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 10px 15px;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .sidebar a.text-danger:hover {
+      background-color: rgba(255, 0, 0, 0.2);
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .card img {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .badge-hot {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: red;
+      color: white;
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <img src="/img/avatar.jpg" alt="Avatar">
+  <h5>Xin chào!</h5>
+  <a href="/home"><i class="fas fa-home"></i> Trang chủ</a>
+  <a href="/users/edit-profile"><i class="fas fa-user"></i> Cá nhân</a>
+  <a href="/tenants/rooms"><i class="fas fa-bed"></i> Phòng</a>
+  <a href="/payments/user"><i class="fas fa-calendar-alt"></i> Thanh toán</a>
+  <a href="/logout" class="text-danger"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+</div>
+
+<!-- MAIN -->
+<div class="main-content" data-aos="fade-up">
+  <h4 class="mb-4"><i class="fas fa-door-open"></i> Danh sách phòng trống</h4>
+
+  <div class="row g-4" th:if="${vacantRooms != null and vacantRooms.size() > 0}">
+    <div class="col-md-4" th:each="room : ${vacantRooms}">
+      <div class="card shadow-sm border-0 h-100 position-relative">
+        <img th:src="${room.imageUrl != null and room.imageUrl != ''} ? @{${room.imageUrl}} : @{/img/default-room.jpg}"
+             class="card-img-top" alt="Room Image">
+        <div class="badge-hot">HOT</div>
+        <div class="card-body">
+          <h6 class="card-title" th:text="${room.title}">Tiêu đề phòng</h6>
+          <p class="card-text text-danger fw-bold mb-1"
+             th:text="'Từ ' + ${#numbers.formatDecimal(room.price, 0, 'COMMA', 0, 'POINT')} + ' triệu/tháng'">
+            3,5 triệu/tháng
+          </p>
+          <span class="badge bg-light text-dark border me-1">Nhà trọ</span>
+          <span class="badge bg-light text-dark border">Phòng trọ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:if="${vacantRooms == null or vacantRooms.size() == 0}" class="text-center text-muted">
+    <p>Không có phòng nào trống.</p>
+  </div>
+</div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+</body>
+</html>
