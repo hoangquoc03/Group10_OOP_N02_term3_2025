@@ -6,7 +6,7 @@
 - Lê Quang Thắng  
 
 ## 🔗 Các liên kết quan trọng
-- 🔗 [GitHub Repository](https://github.com/your-org/your-repo)
+- 🔗 [GitHub Repository](https://github.com/hoangquoc03/Group10_OOP_N02_term3_2025)
 - 📺 [Video demo ứng dụng (YouTube)](https://youtu.be/5s0ffWMRhvU)
 
 
