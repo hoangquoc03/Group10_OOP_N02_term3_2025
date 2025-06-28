@@ -68,10 +68,10 @@ class Landlord {
 
 | Đối tượng   | Chức năng                                        |
 |-------------|--------------------------------------------------|
-| Tenant      | Thêm/Sửa/Xoá, Xem danh sách, Gán phòng           |
-| Room        | Thêm/Sửa/Xoá,Xem, Xem trạng thái, Gán tenant     |
+| Tenant      | Thêm/Sửa/Xoá  danh sách                          |
+| Room        | Thêm/Sửa/Xoá,Xem Xem trạng thái, Gán tenant      |
 | Landlord    | Thêm/Sửa/Xoá, Quản lý danh sách phòng sở hữu     |
-| Contract    |  Quản lý hợp đồng thuê phòng                     |
+| Contract    |  Thêm/Sửa/Xoá, Quản lý hợp đồng thuê phòng       |
 | Thống kê    | Thống kê số lượng người dùng, phòng đang thuê    |
 | phản hồi    | đang được nâng cấp thêm                          |
 | hóa đơn     | đang được nâng cấp thêm                          |
