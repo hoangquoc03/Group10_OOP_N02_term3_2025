@@ -29,7 +29,7 @@
  <img src="img/thuattoann.png" alt="Sequence Diagram 2" width="600"/>
 
 ## Lê Hồng Quốc : 
-<img src="img/demo1.png" alt="Flowchart Algorithm" width="600"/>
+<img src="img/Room2.jpg" alt="Flowchart Algorithm" width="600"/>
 
 ## Đặng Thanh Tùng :
 
