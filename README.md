@@ -7,9 +7,8 @@
 
 ## 🔗 Các liên kết quan trọng
 - 🔗 [GitHub Repository](https://github.com/your-org/your-repo)
-- 📺 [Video demo ứng dụng (YouTube)](https://youtube.com/your-demo)
-- 🌐 [Ứng dụng chạy toàn cầu (nếu có)](https://your-app-link.com)
-- 📄 [Bìa theo mẫu ĐH Phenikaa (PDF)](https://your-link.com/cover.pdf)
+- 📺 [Video demo ứng dụng (YouTube)](https://youtu.be/5s0ffWMRhvU)
+
 
 ## 🏠 Giới thiệu Dự án
 
