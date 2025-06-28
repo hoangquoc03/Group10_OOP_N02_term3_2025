@@ -29,8 +29,14 @@ public class UserService {
         userRepository.deleteById(id);
     } 
     public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+    List<User> users = userRepository.findAllByUsername(username);
+    if (users.isEmpty()) return null;
+    if (users.size() > 1) {
+        System.err.println("⚠️ Có nhiều hơn 1 user trùng username: " + username);
     }
+    return users.get(0); // lấy bản ghi đầu tiên
+   }
+
     public long countByRole(User.Role role) {
         return userRepository.countByRole(role);
     }

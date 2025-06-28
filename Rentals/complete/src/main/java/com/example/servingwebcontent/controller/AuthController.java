@@ -16,14 +16,14 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    // === Trang hiển thị đăng nhập & đăng ký ===
+    // === Trang đăng nhập & đăng ký (sử dụng chung 1 trang login_sign.html) ===
     @GetMapping({"/login", "/register"})
     public String showLoginRegisterPage(Model model) {
-        model.addAttribute("user", new User()); // đảm bảo có object để binding
-        return "login_sign"; // chung một file form
+        model.addAttribute("user", new User());
+        return "login_sign";
     }
 
-    // === Đăng ký ===
+    // === Xử lý đăng ký ===
     @PostMapping("/register")
     public String register(@ModelAttribute("user") User user, Model model) {
         if (userService.getUserByUsername(user.getUsername()) != null) {
@@ -33,31 +33,36 @@ public class AuthController {
 
         user.setCreatedAt(LocalDateTime.now());
         userService.saveUser(user);
-        model.addAttribute("successMessage", "✅ Đăng ký thành công! Hãy đăng nhập.");
-        model.addAttribute("user", new User());
-        return "login_sign"; // trở lại trang với thông báo
+        model.addAttribute("successMessage", "✅ Đăng ký thành công! Vui lòng đăng nhập.");
+        model.addAttribute("user", new User()); // reset form
+        return "login_sign";
     }
 
-    // === Đăng nhập ===
+    // === Xử lý đăng nhập ===
     @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
-                        Model model,
-                        HttpSession session) {
+                        HttpSession session,
+                        Model model) {
+
+        System.out.println("🔐 Đăng nhập với: " + username);
         User user = userService.getUserByUsername(username);
 
         if (user == null || !user.getPassword().equals(password)) {
+            System.out.println("❌ Sai thông tin đăng nhập.");
             model.addAttribute("errorMessage", "❌ Sai tên đăng nhập hoặc mật khẩu.");
             model.addAttribute("user", new User());
             return "login_sign";
         }
 
         session.setAttribute("loggedInUser", user);
+        System.out.println("✅ Đăng nhập thành công: " + user.getUsername() + " - Vai trò: " + user.getRole());
 
+        // Phân quyền điều hướng
         if (user.getRole() == User.Role.admin) {
-            return "redirect:/admin"; // Giao diện admin
+            return "redirect:/admin";
         } else {
-            return "redirect:/home"; // Giao diện người dùng
+            return "redirect:/home";
         }
     }
 
@@ -65,7 +70,7 @@ public class AuthController {
     @GetMapping("/logout")
     public String logout(HttpSession session, Model model) {
         session.invalidate();
-        model.addAttribute("user", new User()); // cần cho Thymeleaf binding form
-        return "login_sign"; // quay lại form login/register
+        model.addAttribute("user", new User());
+        return "login_sign";
     }
 }
