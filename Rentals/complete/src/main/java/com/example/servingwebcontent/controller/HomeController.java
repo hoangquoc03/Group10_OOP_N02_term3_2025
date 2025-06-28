@@ -23,7 +23,7 @@ public class HomeController {
         if (user == null) return "redirect:/login";
 
         if (user.getRole() == User.Role.admin) {
-            return "redirect:/admin/admin_dashboard.html";
+            return "redirect:/admin";
         } else {
             return "redirect:/home";
         }
