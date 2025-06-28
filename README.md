@@ -73,6 +73,9 @@ class Landlord {
 | Landlord    | Thêm/Sửa/Xoá, Quản lý danh sách phòng sở hữu     |
 | Contract    |  Quản lý hợp đồng thuê phòng                     |
 | Thống kê    | Thống kê số lượng người dùng, phòng đang thuê    |
+| phản hồi    | đang được nâng cấp thêm                          |
+| hóa đơn     | đang được nâng cấp thêm                          |
+| Thông báo   | đang được nâng cấp thêm mới hiện trên dashboard  |
 
 ## 🧪 Kiểm thử & Xử lý lỗi
 
