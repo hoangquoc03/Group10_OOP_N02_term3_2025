@@ -116,5 +116,29 @@ public class RoomController {
         model.addAttribute("devices", devices);
         return "room_detail";
    }
-    
+    @GetMapping("/search")
+public String searchRooms(@RequestParam(required = false) String keyword,
+                          @RequestParam(required = false) Room.Status status,
+                          Model model) {
+    try {
+        List<Room> rooms;
+
+        if ((keyword == null || keyword.isEmpty()) && status == null) {
+            rooms = roomRepository.findAll(); // Không có gì được nhập
+        } else if (keyword != null && !keyword.isEmpty() && status != null) {
+            rooms = roomRepository.findByRoomNumberContainingIgnoreCaseAndStatus(keyword, status);
+        } else if (keyword != null && !keyword.isEmpty()) {
+            rooms = roomRepository.findByRoomNumberContainingIgnoreCase(keyword);
+        } else {
+            rooms = roomRepository.findByStatus(status);
+        }
+
+        model.addAttribute("rooms", rooms);
+        return "room_list";
+    } catch (Exception e) {
+        model.addAttribute("errorMessage", "Lỗi khi tìm kiếm phòng: " + e.getMessage());
+        return "error";
+    }
+}
+
 }

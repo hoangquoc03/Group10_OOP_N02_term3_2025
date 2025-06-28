@@ -10,10 +10,16 @@ import java.util.List;
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
 
-    // Truy vấn danh sách phòng có dueDate nằm trong khoảng từ now đến 7 ngày tới
+
     List<Room> findByDueDateBetween(LocalDateTime start, LocalDateTime end);
     List<Room> findByDueDateBetweenAndStatus(LocalDateTime start, LocalDateTime end, Room.Status status);
+
+
     List<Room> findByStatus(Room.Status status);
     long countByStatus(Room.Status status);
+
+
+    List<Room> findByRoomNumberContainingIgnoreCase(String keyword);
+
+    List<Room> findByRoomNumberContainingIgnoreCaseAndStatus(String keyword, Room.Status status);
 }
- 

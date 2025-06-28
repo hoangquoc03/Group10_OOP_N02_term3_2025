@@ -200,7 +200,33 @@
       <!-- Content -->
       <div class="p-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
+
           <h3 class="mb-0">📋 Danh sách phòng</h3>
+<form th:action="@{/rooms/search}" method="get" class="row g-2 align-items-center mb-3">
+  <div class="col-md-4">
+    <div class="input-group">
+      <span class="input-group-text bg-white"><i class="fas fa-search text-primary"></i></span>
+      <input type="text" name="keyword" class="form-control" placeholder="Nhập số phòng..." th:value="${param.keyword}">
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <select name="status" class="form-select">
+      <option value="">-- Trạng thái --</option>
+      <option value="available" th:selected="${param.status == 'available'}">🟢 Trống</option>
+      <option value="occupied" th:selected="${param.status == 'occupied'}">🟡 Đã thuê</option>
+      <option value="maintenance" th:selected="${param.status == 'maintenance'}">🔴 Bảo trì</option>
+    </select>
+  </div>
+
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary w-100">
+      <i class="fas fa-filter"></i> Lọc
+    </button>
+  </div>
+</form>
+
+
           <a href="/rooms/new" class="btn btn-success"><i class="fas fa-plus"></i> Thêm phòng</a>
         </div>
 
