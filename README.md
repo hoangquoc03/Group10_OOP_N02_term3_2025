@@ -9,7 +9,7 @@
 - 🔗 [GitHub Repository](https://github.com/hoangquoc03/Group10_OOP_N02_term3_2025)
 - 
 - 📺 [Video demo ứng dụng (YouTube)](https://youtu.be/nww_GJxlJE4)
-- 📺 [Do lỗi trên Youtube(video trong gg )](https://drive.google.com/drive/folders/1zNvW8aUyf9c_HzmPZ3qZWWWQywHfAoGm?usp=sharing)
+- 📺 [Do lỗi trên Youtube(video trong gg drive)](https://drive.google.com/drive/folders/1zNvW8aUyf9c_HzmPZ3qZWWWQywHfAoGm?usp=sharing)
 
 ## 🏠 Giới thiệu Dự án
 
